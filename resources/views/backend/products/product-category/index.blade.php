@@ -57,11 +57,36 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product Category</th>
+                                <th>Thumbnail Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             
+                                @foreach($categories as $index => $category)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $category->category_name }}</td>
+                                        <td>
+                                            @if($category->thumbnail_image)
+                                                <img src="{{ asset('uploads/products/' . $category->thumbnail_image) }}" 
+                                                    alt="{{ $category->category_name }}" 
+                                                    class="img-thumbnail" 
+                                                    style="height: 80px;">
+                                            @else
+                                                <span class="text-muted">No Image</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('manage-products-category.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <form action="{{ route('manage-products-category.destroy', $category->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete this category?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
