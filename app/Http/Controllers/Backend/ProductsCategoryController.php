@@ -24,7 +24,6 @@ class ProductsCategoryController extends Controller
         return view('backend.products.product-category.index', compact('categories'));
     }
 
-
     public function create(Request $request)
     { 
         return view('backend.products.product-category.create');
@@ -113,7 +112,6 @@ class ProductsCategoryController extends Controller
         return redirect()->route('manage-products-category.index')
                         ->with('message', 'Product Category updated successfully!');
     }
-
 
     public function destroy(string $id)
     {
