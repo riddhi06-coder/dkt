@@ -10,7 +10,7 @@ use App\Http\Controllers\Backend\ProductDetailsController;
 use App\Http\Controllers\Backend\HomeBannerDetailsController;
 use App\Http\Controllers\Backend\HomeIntroDetailsController;
 use App\Http\Controllers\Backend\HomeSocialDetailsController;
-
+use App\Http\Controllers\Backend\HomeVisionController;
 
 
 
@@ -64,6 +64,9 @@ Route::resource('manage-home-banner-details', HomeBannerDetailsController::class
 // ==== Manage Home Intro Details
 Route::resource('manage-intro-details', HomeIntroDetailsController::class);
 
-// ==== Manage Home Intro Details
+// ==== Manage Home social Details
 Route::resource('manage-social-home', HomeSocialDetailsController::class);
+
+// ==== Manage Home Vision Details
+Route::resource('manage-vision', HomeVisionController::class);
 
