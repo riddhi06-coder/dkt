@@ -72,6 +72,13 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="col-md-12" style="margin-bottom: 20px;">
+                                        <label class="form-label" for="description">Small Description <span class="txt-danger">*</span></label>
+                                        <textarea id="description" class="form-control" name="description" rows="5" placeholder="Enter description here" required value="{{ old('description') }}"></textarea>
+                                        <div class="invalid-feedback">Please enter description here.</div>
+                                    </div>
+
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
                                         <a href="{{ route('manage-products-category.index') }}" class="btn btn-danger px-4">Cancel</a>

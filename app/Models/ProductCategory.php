@@ -16,6 +16,7 @@ class ProductCategory extends Model
         'category_name',
         'slug',
         'thumbnail_image',
+        'description',
         'inserted_at',
         'inserted_by',
         'modified_at',

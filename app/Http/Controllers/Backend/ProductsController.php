@@ -41,6 +41,7 @@ class ProductsController extends Controller
             'category_id'   => 'required|exists:product_category,id',
             'product_name' => 'required|string|max:255',
             'thumbnail'     => 'required|image|mimes:jpg,jpeg,png,webp|max:2048', 
+            
         ], [
             'category_id.required'   => 'Please select a category.',
             'category_id.exists'     => 'The selected category is invalid.',

@@ -58,24 +58,32 @@
                                     </div>
 
 
-                                        <!-- Thumbnail Image -->
-                                        <div class="col-md-6">
-                                            <label class="form-label" for="thumbnail">Thumbnail Image <span class="txt-danger">*</span></label>
-                                            <input class="form-control" id="thumbnail" type="file" name="thumbnail" onchange="previewThumbnail(event)">
-                                            <div class="invalid-feedback">Please upload a thumbnail image.</div>
-                                            <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
-                                            <br>
-                                            <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                                    <!-- Thumbnail Image -->
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="thumbnail">Thumbnail Image <span class="txt-danger">*</span></label>
+                                        <input class="form-control" id="thumbnail" type="file" name="thumbnail" onchange="previewThumbnail(event)">
+                                        <div class="invalid-feedback">Please upload a thumbnail image.</div>
+                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                                        <br>
+                                        <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
 
-                                            <!-- Image Preview -->
-                                            <div class="mt-2">
-                                                <img id="thumbnailPreview" 
-                                                    src="{{ $category->thumbnail_image ? asset('uploads/products/' . $category->thumbnail_image) : '#' }}" 
-                                                    alt="Preview" 
-                                                    class="img-fluid rounded border" 
-                                                    style="max-height: 150px; {{ $category->thumbnail_image ? '' : 'display:none;' }}">
-                                            </div>
+                                        <!-- Image Preview -->
+                                        <div class="mt-2">
+                                            <img id="thumbnailPreview" 
+                                                src="{{ $category->thumbnail_image ? asset('uploads/products/' . $category->thumbnail_image) : '#' }}" 
+                                                alt="Preview" 
+                                                class="img-fluid rounded border" 
+                                                style="max-height: 150px; {{ $category->thumbnail_image ? '' : 'display:none;' }}">
                                         </div>
+                                    </div>
+
+
+                                    <div class="col-md-12" style="margin-bottom: 20px;">
+                                        <label class="form-label" for="description">Small Description <span class="txt-danger">*</span></label>
+                                        <textarea id="description" class="form-control" name="description" rows="5" placeholder="Enter description here" required>{{ old('description', $category->description) }}</textarea>
+                                        <div class="invalid-feedback">Please enter description here.</div>
+                                    </div>
+
 
 
                                     <!-- Form Actions -->

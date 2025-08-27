@@ -36,6 +36,7 @@ class ProductsCategoryController extends Controller
         $request->validate([
             'category_name' => 'required|string|max:255|unique:product_category,category_name',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048', 
+            'description' => 'required|string|max:255',
         ], [
             'category_name.required' => 'Please enter a product category name.',
             'category_name.unique' => 'This category name already exists.',
@@ -43,6 +44,9 @@ class ProductsCategoryController extends Controller
             'thumbnail.image' => 'The thumbnail must be an image.',
             'thumbnail.mimes' => 'Only JPG, JPEG, PNG, or WEBP formats are allowed.11',
             'thumbnail.max' => 'The thumbnail size must be less than 2MB.',
+            'description.required' => 'The Description field is required.',
+            'description.string' => 'The Description must be a valid string.',
+            'description.max' => 'The Description cannot exceed 255 characters.',
         ]);
 
         $imageName = null;
@@ -56,6 +60,7 @@ class ProductsCategoryController extends Controller
 
         ProductCategory::create([
             'category_name' => $request->category_name,
+            'description' => $request->description,
             'slug' => $slug,
             'thumbnail_image' => $imageName, 
             'inserted_by' => Auth::id(),
@@ -81,12 +86,16 @@ class ProductsCategoryController extends Controller
         $request->validate([
             'category_name' => 'required|string|max:255|unique:product_category,category_name,' . $category->id,
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', 
+            'description' => 'required|string|max:255',
         ], [
             'category_name.required' => 'Please enter a product category name.',
             'category_name.unique' => 'This category name already exists.',
             'thumbnail.image' => 'The thumbnail must be an image.',
             'thumbnail.mimes' => 'Only JPG, JPEG, PNG, or WEBP formats are allowed.',
             'thumbnail.max' => 'The thumbnail size must be less than 2MB.',
+             'description.required' => 'The Description field is required.',
+            'description.string' => 'The Description must be a valid string.',
+            'description.max' => 'The Description cannot exceed 255 characters.',
         ]);
 
         // ✅ Handle Thumbnail Upload
@@ -104,6 +113,7 @@ class ProductsCategoryController extends Controller
 
         // ✅ Update other fields
         $category->category_name = $request->category_name;
+         $category->description = $request->description;
         $category->slug = Str::slug($request->category_name, '-');
         $category->modified_by = Auth::id();
         $category->modified_at = Carbon::now();

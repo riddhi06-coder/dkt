@@ -103,7 +103,7 @@
                                                 style="max-height: 150px;">
                                         </div>
                                     </div>
-
+                                    
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
                                         <a href="{{ route('manage-products.index') }}" class="btn btn-danger px-4">Cancel</a>
