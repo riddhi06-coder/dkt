@@ -75,7 +75,6 @@ class ProductsController extends Controller
         return redirect()->route('manage-products.index')->with('message', 'Product added successfully.');
     }
 
-
     public function edit($id)
     {
         $category = Products::findOrFail($id);
