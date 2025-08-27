@@ -23,7 +23,18 @@ class ProductDetailsController extends Controller
 
     public function index()
     {
-        return view('backend.products.products-details.index');
+        $categories = ProductCategory::with(['productsDetails' => function($query) {
+            $query->with('product') // eager load the product
+                ->whereNull('deleted_by');
+        }])
+        ->whereNull('deleted_by')
+        ->orderBy('category_name', 'asc')
+        ->get();
+
+        // dd($categories);
+
+
+        return view('backend.products.products-details.index', compact('categories'));
     }
 
     public function create(Request $request)
@@ -34,7 +45,6 @@ class ProductDetailsController extends Controller
 
         return view('backend.products.products-details.create', compact('categories'));
     }
-
 
     public function getProducts($categoryId)
     {
@@ -47,7 +57,6 @@ class ProductDetailsController extends Controller
         return response()->json($products);
     }
 
-    
     public function store(Request $request)
     {
         // ✅ Step 1: Validate the request
@@ -139,5 +148,13 @@ class ProductDetailsController extends Controller
                         ->with('message', 'Product details added successfully!');
     }
 
+    public function edit($id)
+    {
+        $category = ProductDetails::findOrFail($id);
+        $categories = ProductCategory::whereNull('deleted_by')
+                        ->orderBy('category_name', 'asc')
+                        ->get();
+        return view('backend.products.products-details.edit', compact('category','categories'));
+    }
 
 }

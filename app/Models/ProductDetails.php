@@ -29,4 +29,11 @@ class ProductDetails extends Model
         'deleted_at',
         'deleted_by',
     ];
+
+
+    public function product()
+    {
+        return $this->belongsTo(Products::class, 'product_id'); 
+    }
+
 }
