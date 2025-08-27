@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Backend\ProductsCategoryController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategoryDetailsController;
+use App\Http\Controllers\Backend\ProductDetailsController;
 
 // =========================================================================== Backend Routes
 
@@ -44,3 +45,8 @@ Route::resource('manage-products', ProductsController::class);
 
 // ==== Manage Products
 Route::resource('manage-category-details', CategoryDetailsController::class);
+
+// ==== Manage Products Details
+Route::resource('manage-product-details', ProductDetailsController::class);
+Route::get('/get-products/{category}', [ProductDetailsController::class, 'getProducts']);
+
