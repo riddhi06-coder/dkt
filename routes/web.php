@@ -8,7 +8,7 @@ use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategoryDetailsController;
 use App\Http\Controllers\Backend\ProductDetailsController;
 use App\Http\Controllers\Backend\HomeBannerDetailsController;
-
+use App\Http\Controllers\Backend\HomeIntroDetailsController;
 
 
 
@@ -60,4 +60,7 @@ Route::get('/get-products/{category}', [ProductDetailsController::class, 'getPro
 
 // ==== Manage Home Banner Details
 Route::resource('manage-home-banner-details', HomeBannerDetailsController::class);
+
+// ==== Manage Home Intro Details
+Route::resource('manage-intro-details', HomeIntroDetailsController::class);
 
