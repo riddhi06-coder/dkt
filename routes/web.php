@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\Backend\ProductsCategoryController;
-
+use App\Http\Controllers\Backend\ProductsController;
 
 // =========================================================================== Backend Routes
 
@@ -37,3 +37,6 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
 // ==== Manage Products Category
 Route::resource('manage-products-category', ProductsCategoryController::class);
+
+// ==== Manage Products
+Route::resource('manage-products', ProductsController::class);

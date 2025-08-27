@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductCategory extends Model
+class Products extends Model
 {
     use HasFactory;
 
-    protected $table = 'product_category';
+    protected $table = 'products';
     public $timestamps = false;
 
     protected $fillable = [
-        'category_name',
+        'category_id',
+        'product_name',
         'slug',
         'thumbnail_image',
         'inserted_at',
@@ -23,9 +24,4 @@ class ProductCategory extends Model
         'deleted_at',
         'deleted_by',
     ];
-
-    public function products()
-    {
-        return $this->hasMany(Products::class, 'category_id');
-    }
 }
