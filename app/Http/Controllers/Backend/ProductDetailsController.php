@@ -24,15 +24,12 @@ class ProductDetailsController extends Controller
     public function index()
     {
         $categories = ProductCategory::with(['productsDetails' => function($query) {
-            $query->with('product') // eager load the product
+            $query->with('product') 
                 ->whereNull('deleted_by');
         }])
         ->whereNull('deleted_by')
         ->orderBy('category_name', 'asc')
         ->get();
-
-        // dd($categories);
-
 
         return view('backend.products.products-details.index', compact('categories'));
     }
@@ -150,11 +147,138 @@ class ProductDetailsController extends Controller
 
     public function edit($id)
     {
-        $category = ProductDetails::findOrFail($id);
+        // Fetch product details with its category
+        $productDetails = ProductDetails::select(
+                'product_details.*',
+                'product_category.id as category_id',
+                'product_category.category_name'
+            )
+            ->join('product_category', 'product_category.id', '=', 'product_details.category_id')
+            ->where('product_details.id', $id)
+            ->whereNull('product_details.deleted_by')
+            ->whereNull('product_category.deleted_by')
+            ->firstOrFail();
+
+        // Fetch all products of this category
+        $productsOfCategory = ProductDetails::where('category_id', $productDetails->category_id)
+                                    ->whereNull('deleted_by')
+                                    ->get(['id']); // Only IDs since no product_name column
+
+        // Fetch all categories
         $categories = ProductCategory::whereNull('deleted_by')
                         ->orderBy('category_name', 'asc')
                         ->get();
-        return view('backend.products.products-details.edit', compact('category','categories'));
+
+
+        return view('backend.products.products-details.edit', compact('productDetails','categories','productsOfCategory'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // ✅ Step 1: Fetch existing record
+        $productDetails = ProductDetails::findOrFail($id);
+
+        // ✅ Step 2: Validate the request
+        $validated = $request->validate([
+            'category_id'       => [
+                'required',
+                'exists:product_category,id',
+                Rule::unique('product_details')
+                    ->ignore($productDetails->id)
+                    ->where(function ($query) use ($request) {
+                        return $query->where('category_id', $request->category_id)
+                                    ->where('product_id', $request->product_id)
+                                    ->whereNull('deleted_by');
+                    }),
+            ],
+            'product_id'        => 'required|exists:products,id',
+            'thumbnail'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'product_image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'buy_now'           => 'nullable|url',
+            'description'       => 'required|string',
+            'use_of_tablet'     => 'required|string',
+            'direction_to_use'  => 'required|string',
+            'tablet_name.*'     => 'required|string',
+            'dose.*'            => 'required|string',
+        ], [
+            'category_id.required'    => 'Please select a category.',
+            'category_id.exists'      => 'The selected category is invalid.',
+            'category_id.unique'      => 'Details for this product in this category already exist.',
+            'product_id.required'     => 'Please select a product.',
+            'product_id.exists'       => 'The selected product is invalid.',
+            'thumbnail.image'         => 'The Banner must be an image.',
+            'thumbnail.mimes'         => 'Only JPG, JPEG, PNG, or WEBP formats are allowed for Banner.',
+            'thumbnail.max'           => 'The Banner size must not exceed 2MB.',
+            'product_image.image'     => 'The Product image must be an image.',
+            'product_image.mimes'     => 'Only JPG, JPEG, PNG, or WEBP formats are allowed for Product image.',
+            'product_image.max'       => 'The Product image size must not exceed 2MB.',
+            'buy_now.url'             => 'Please enter a valid Buy Now URL.',
+            'description.required'    => 'Please enter a description.',
+            'use_of_tablet.required'  => 'Please enter Use of Tablet.',
+            'direction_to_use.required' => 'Please enter Direction To use.',
+            'tablet_name.*.required'  => 'Please enter Tablet Name.',
+            'dose.*.required'         => 'Please enter Dose.',
+        ]);
+
+        // ✅ Step 3: Handle Banner Image upload (replace if new file uploaded)
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+            $bannerImage = time() . rand(10, 999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/products'), $bannerImage);
+            $productDetails->thumbnail_image = $bannerImage;
+        }
+
+        // ✅ Step 4: Handle Product Image upload (replace if new file uploaded)
+        if ($request->hasFile('product_image')) {
+            $image = $request->file('product_image');
+            $productImage = time() . rand(10, 999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/products'), $productImage);
+            $productDetails->product_image = $productImage;
+        }
+
+        // ✅ Step 5: Encode Tablet & Dose table data as JSON
+        $composition = [];
+        $tabletNames = $request->tablet_name;
+        $doses = $request->dose;
+
+        foreach ($tabletNames as $index => $tablet) {
+            $composition[] = [
+                'tablet_name' => $tablet,
+                'dose'        => $doses[$index] ?? '',
+            ];
+        }
+
+        // ✅ Step 6: Update other fields
+        $productDetails->category_id      = $validated['category_id'];
+        $productDetails->product_id       = $validated['product_id'];
+        $productDetails->buy_now          = $validated['buy_now'] ?? null;
+        $productDetails->description      = $validated['description'];
+        $productDetails->use_of_tablet    = $validated['use_of_tablet'];
+        $productDetails->direction_to_use = $validated['direction_to_use'];
+        $productDetails->composition      = json_encode($composition);
+        $productDetails->modified_by       = Auth::id();
+        $productDetails->modified_at       = Carbon::now();
+
+        // ✅ Step 7: Save changes
+        $productDetails->save();
+
+        // ✅ Step 8: Redirect with success message
+        return redirect()->route('manage-product-details.index')
+                        ->with('message', 'Product details updated successfully!');
+    }
+
+    public function destroy(string $id)
+    {
+        $data['deleted_by'] =  Auth::user()->id;
+        $data['deleted_at'] =  Carbon::now();
+        try {
+            $industries = ProductDetails::findOrFail($id);
+            $industries->update($data);
+
+            return redirect()->route('manage-product-details.index')->with('message', 'Product deleted successfully!');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
+        }
     }
 
 }
