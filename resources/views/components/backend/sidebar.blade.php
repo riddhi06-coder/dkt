@@ -50,6 +50,23 @@
                   </ul>
                 </li>
 
+
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner-details.index', 'manage-products.index', 'manage-category-details.index','manage-product-details.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"> </i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                    </svg>
+                    <span>Home</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('manage-home-banner-details.index') }}" class="{{ request()->routeIs('manage-home-banner-details.index') ? 'active' : '' }}">Banner Details</a></li>
+                  </ul>
+                </li>
+
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>

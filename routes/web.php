@@ -7,6 +7,14 @@ use App\Http\Controllers\Backend\ProductsCategoryController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategoryDetailsController;
 use App\Http\Controllers\Backend\ProductDetailsController;
+use App\Http\Controllers\Backend\HomeBannerDetailsController;
+
+
+
+
+
+
+
 
 // =========================================================================== Backend Routes
 
@@ -49,4 +57,7 @@ Route::resource('manage-category-details', CategoryDetailsController::class);
 // ==== Manage Products Details
 Route::resource('manage-product-details', ProductDetailsController::class);
 Route::get('/get-products/{category}', [ProductDetailsController::class, 'getProducts']);
+
+// ==== Manage Home Banner Details
+Route::resource('manage-home-banner-details', HomeBannerDetailsController::class);
 
