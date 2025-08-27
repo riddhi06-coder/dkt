@@ -21,10 +21,9 @@ class HomeIntroDetailsController extends Controller
 
     public function index()
     {
-        $introDetails = HomeIntro::orderBy('inserted_at', 'asc')->get();
+        $introDetails = HomeIntro::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
         return view('backend.home.intro.index', compact('introDetails'));
     }
-
 
     public function create(Request $request)
     {
@@ -98,6 +97,125 @@ class HomeIntroDetailsController extends Controller
         // ✅ Step 6: Redirect with success message
         return redirect()->route('manage-intro-details.index')
                         ->with('message', 'Intro details added successfully!');
+    }
+
+    public function edit($id)
+    {
+        $intro = HomeIntro::findOrFail($id);
+
+        // Decode gallery images JSON
+        $galleryImages = $intro->gallery_images ? json_decode($intro->gallery_images, true) : [];
+
+        return view('backend.home.intro.edit', compact('intro', 'galleryImages'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // ✅ Step 1: Find the record
+        $intro = HomeIntro::findOrFail($id);
+
+        // ✅ Step 2: Validate request
+        $validated = $request->validate([
+            'image'          => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'results_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'description'    => 'required|string',
+            'gallery_image.*'=> 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'image.image'             => 'Uploaded file must be an image.',
+            'image.mimes'             => 'Only JPG, JPEG, PNG, or WEBP formats are allowed for Image.',
+            'image.max'               => 'Image size must not exceed 2MB.',
+
+            'results_image.image'     => 'Uploaded Results file must be an image.',
+            'results_image.mimes'     => 'Only JPG, JPEG, PNG, or WEBP formats are allowed for Results Image.',
+            'results_image.max'       => 'Results Image size must not exceed 2MB.',
+
+            'description.required'    => 'Please enter a description.',
+            'description.string'      => 'Description must be a valid string.',
+
+            'gallery_image.*.image'   => 'Gallery file must be an image.',
+            'gallery_image.*.mimes'   => 'Only JPG, JPEG, PNG, or WEBP formats are allowed for Gallery Images.',
+            'gallery_image.*.max'     => 'Gallery Image size must not exceed 2MB.',
+        ]);
+
+        // ✅ Step 3: Handle Image upload (replace if new one uploaded)
+        if ($request->hasFile('image')) {
+            // Delete old file if exists
+            if ($intro->image && file_exists(public_path('uploads/home/' . $intro->image))) {
+                unlink(public_path('uploads/home/' . $intro->image));
+            }
+
+            $image = $request->file('image');
+            $imageFile = time() . rand(10, 999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/home'), $imageFile);
+            $intro->image = $imageFile;
+        }
+
+        // ✅ Step 4: Handle Results Image upload (replace if new one uploaded)
+        if ($request->hasFile('results_image')) {
+            if ($intro->results_image && file_exists(public_path('uploads/home/' . $intro->results_image))) {
+                unlink(public_path('uploads/home/' . $intro->results_image));
+            }
+
+            $results = $request->file('results_image');
+            $resultsFile = time() . rand(10, 999) . '.' . $results->getClientOriginalExtension();
+            $results->move(public_path('uploads/home'), $resultsFile);
+            $intro->results_image = $resultsFile;
+        }
+
+        // ✅ Step 5: Handle Gallery Images update
+        $existingGallery = json_decode($intro->gallery_images, true) ?? [];
+        $submittedGallery = $request->input('existing_gallery', []); // remaining from form
+
+        // Delete files that were removed
+        $deletedImages = array_diff($existingGallery, $submittedGallery);
+        foreach ($deletedImages as $delImg) {
+            $filePath = public_path('uploads/home/' . $delImg);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        // Start with submitted (remaining) gallery images
+        $finalGallery = $submittedGallery;
+
+        // Add new uploaded images
+        if ($request->hasFile('gallery_image')) {
+            foreach ($request->file('gallery_image') as $gallery) {
+                $galleryName = time() . rand(10, 999) . '.' . $gallery->getClientOriginalExtension();
+                $gallery->move(public_path('uploads/home'), $galleryName);
+                $finalGallery[] = $galleryName;
+            }
+        }
+
+        // Save final gallery list
+        $intro->gallery_images = json_encode($finalGallery);
+
+
+        // ✅ Step 6: Update other fields
+        $intro->description = $validated['description'];
+        $intro->modified_by = \Auth::id();
+        $intro->modified_at = Carbon::now();
+
+        // ✅ Step 7: Save
+        $intro->save();
+
+        // ✅ Step 8: Redirect with success message
+        return redirect()->route('manage-intro-details.index')
+                        ->with('message', 'Intro details updated successfully!');
+    }
+
+    public function destroy(string $id)
+    {
+        $data['deleted_by'] =  Auth::user()->id;
+        $data['deleted_at'] =  Carbon::now();
+        try {
+            $industries = HomeIntro::findOrFail($id);
+            $industries->update($data);
+
+            return redirect()->route('manage-intro-details.index')->with('message', 'Product deleted successfully!');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
+        }
     }
 
 }

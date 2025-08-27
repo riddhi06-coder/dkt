@@ -66,17 +66,14 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
 
-                                    <!-- Main Image -->
                                     <td>
                                         @if($intro->image)
                                             <img src="{{ asset('uploads/home/' . $intro->image) }}" alt="Image" style="max-height:150px;">
                                         @endif
                                     </td>
 
-                                    <!-- Description -->
                                     <td>{!! $intro->description !!}</td>
 
-                                    <!-- Actions -->
                                     <td>
                                         <a href="{{ route('manage-intro-details.edit', $intro->id) }}" class="btn btn-sm btn-primary">Edit</a><br><br>
 
