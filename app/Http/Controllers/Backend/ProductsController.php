@@ -21,10 +21,12 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $categories = ProductCategory::with('products')->get();
+            $categories = ProductCategory::with(['products' => function($query) {
+                    $query->whereNull('deleted_by');
+                }])->whereNull('deleted_by')->get();
+
         return view('backend.products.products.index', compact('categories'));
     }
-
 
     public function create(Request $request)
     { 
@@ -74,4 +76,72 @@ class ProductsController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $category = Products::findOrFail($id);
+        $categories = ProductCategory::orderBy('category_name', 'asc')->wherenull('deleted_by')->get();
+        return view('backend.products.products.edit', compact('category','categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // ✅ Step 1: Find product
+        $product = Products::findOrFail($id);
+
+        // ✅ Step 2: Validate request
+        $validated = $request->validate([
+            'category_id'   => 'required|exists:product_category,id',
+            'product_name'  => 'required|string|max:255',
+            'thumbnail'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'category_id.required'   => 'Please select a category.',
+            'category_id.exists'     => 'The selected category is invalid.',
+            'product_name.required'  => 'Please enter a product category name.',
+            'thumbnail.image'        => 'The thumbnail must be an image.',
+            'thumbnail.mimes'        => 'Only JPG, JPEG, PNG, or WEBP formats are allowed.',
+            'thumbnail.max'          => 'The thumbnail size must not exceed 2MB.',
+        ]);
+
+        // ✅ Step 3: Handle image upload
+        $imageName = $product->thumbnail_image; // keep old image by default
+        if ($request->hasFile('thumbnail')) {
+            // delete old image if exists
+            if ($product->thumbnail_image && file_exists(public_path('uploads/products/' . $product->thumbnail_image))) {
+                unlink(public_path('uploads/products/' . $product->thumbnail_image));
+            }
+
+            // upload new image
+            $image = $request->file('thumbnail');
+            $imageName = time() . rand(10, 999) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/products'), $imageName);
+        }
+
+        $slug = Str::slug($request->product_name, '-');
+
+        // ✅ Step 4: Update product in DB
+        $product->category_id = $validated['category_id'];
+        $product->product_name = $validated['product_name'];
+        $product->slug = $slug;
+        $product->thumbnail_image = $imageName;
+        $product->modified_by = Auth::id();
+        $product->modified_at = Carbon::now();
+        $product->save();
+
+        // ✅ Step 5: Redirect with success message
+        return redirect()->route('manage-products.index')->with('message', 'Product updated successfully.');
+    }
+
+    public function destroy(string $id)
+    {
+        $data['deleted_by'] =  Auth::user()->id;
+        $data['deleted_at'] =  Carbon::now();
+        try {
+            $industries = Products::findOrFail($id);
+            $industries->update($data);
+
+            return redirect()->route('manage-products.index')->with('message', 'Products deleted successfully!');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
+        }
+    }
 }
