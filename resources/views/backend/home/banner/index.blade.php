@@ -63,8 +63,39 @@
                             </tr>
                             </thead>
                             <tbody>
-                            
-                               
+                              @php $count = 1; @endphp
+                                @foreach($banners as $banner)
+                                    <tr>
+                                        <td>{{ $count++ }}</td>
+                                        <td>{{ $banner->banner_heading }}</td>
+                                        <td>
+                                            @if($banner->thumbnail)
+                                                <img src="{{ asset('uploads/home/' . $banner->thumbnail) }}" 
+                                                    alt="Banner Image" style="height: 100px;">
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($banner->banner_video)
+                                                <video src="{{ asset('uploads/home/' . $banner->banner_video) }}" 
+                                                    style="max-height: 130px;" controls autoplay muted playsinline>
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('manage-home-banner-details.edit', $banner->id) }}" class="btn btn-sm btn-primary">Edit</a><br><br>
+                                            <form action="{{ route('manage-home-banner-details.destroy', $banner->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
