@@ -90,7 +90,7 @@ class HomeIntroDetailsController extends Controller
             'results_image' => $resultsFile,
             'description'   => $validated['description'],
             'gallery_images'=> json_encode($galleryImages),
-            'inserted_by'   => \Auth::id(),
+            'inserted_by'   => Auth::id(),
             'inserted_at'   => Carbon::now(),
         ]);
 

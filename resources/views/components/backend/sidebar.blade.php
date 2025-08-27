@@ -51,7 +51,7 @@
                 </li>
 
 
-                <li class="sidebar-list {{ request()->routeIs('manage-home-banner-details.index', 'manage-intro-details.index', 'manage-category-details.index','manage-product-details.index') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-home-banner-details.index', 'manage-intro-details.index', 'manage-social-home.index','manage-product-details.index') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"> </i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
@@ -65,6 +65,7 @@
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('manage-home-banner-details.index') }}" class="{{ request()->routeIs('manage-home-banner-details.index') ? 'active' : '' }}">Banner Details</a></li>
                     <li><a href="{{ route('manage-intro-details.index') }}" class="{{ request()->routeIs('manage-intro-details.index') ? 'active' : '' }}">Introduction</a></li>
+                    <li><a href="{{ route('manage-social-home.index') }}" class="{{ request()->routeIs('manage-social-home.index') ? 'active' : '' }}">Social Impacts</a></li>
                   </ul>
                 </li>
 
