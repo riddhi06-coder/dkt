@@ -70,6 +70,20 @@
                   </ul>
                 </li>
 
+
+                <li class="sidebar-list {{ request()->routeIs('manage-about-us.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"></i>
+                  <a class="sidebar-link" href="{{ route('manage-about-us.index') }}">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#customers') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#customers') }}"></use>
+                    </svg>
+                    <span>About Us</span>
+                  </a>
+                </li>
+
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>

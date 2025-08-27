@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\HomeBannerDetailsController;
 use App\Http\Controllers\Backend\HomeIntroDetailsController;
 use App\Http\Controllers\Backend\HomeSocialDetailsController;
 use App\Http\Controllers\Backend\HomeVisionController;
-
+use App\Http\Controllers\Backend\AboutController;
 
 
 
@@ -70,3 +70,5 @@ Route::resource('manage-social-home', HomeSocialDetailsController::class);
 // ==== Manage Home Vision Details
 Route::resource('manage-vision', HomeVisionController::class);
 
+// ==== Manage About Us
+Route::resource('manage-about-us', AboutController::class);
