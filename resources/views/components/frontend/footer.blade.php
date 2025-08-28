@@ -1,265 +1,121 @@
-  <!-- Footer -->
-  <footer id="footer" class="footer">
-            <div class="footer-wrap">
-            <div class="footer-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="footer-infor">
-                                <div class="footer-logo">
-                                    <a href="{{ route('frontend.index') }}">
-                                        <img src="{{ asset('frontend/assets/images/logo/logo.webp') }}" width="144px" height="26px" alt="Murupp Logo">
-                                    </a>
-                                </div>
-                                @php
-                                    $footer = \App\Models\Footer::first();
-                                @endphp
-                                <div class="footer-address">
-                                    <p>{!! $footer->about !!}</p>
-                                    <!-- <a href="{{ $footer->map_url ?? '#' }}" class="tf-btn-default fw-6" target="_blank">GET DIRECTION<i class="icon-arrowUpRight"></i></a> -->
-                                </div>
-
-                                <ul class="footer-info">
-                                <li>
-                                    <i class="icon-mail"></i>
-                                    <p>
-                                        <a href="mailto:{{ $footer->email ?? '' }}">{{ $footer->email ?? '' }}</a>
-                                    </p>
-                                </li>
-                                <li>
-                                    <i class="icon-phone"></i>
-                                    <p>
-                                        <a href="tel:+91{{ $footer->contact_number ?? '' }}">+91 {{ $footer->contact_number ?? '' }}</a>
-                                    </p>
-                                </li>
-
-                                </ul>
-                                    @php
-                                        // Decode the stored media platform and link arrays
-                                        $mediaPlatforms = json_decode($footer->media_platform ?? '[]', true);
-                                        $mediaLinks = json_decode($footer->media_link ?? '[]', true);
-
-                                        // Define icons for known platforms
-                                        $socialIcons = [
-                                            '1' => ['class' => 'social-facebook', 'icon' => 'icon-fb', 'label' => 'Facebook'],
-                                            '2' => ['class' => 'social-twitter', 'icon' => 'icon-x', 'label' => 'Twitter'],
-                                            '3' => ['class' => 'social-instagram', 'icon' => 'icon-instagram', 'label' => 'Instagram'],
-                                            '4' => ['class' => 'social-pinterest', 'icon' => 'icon-pinterest', 'label' => 'Pinterest']
-                                        ];
-                                    @endphp
-
-                                    <ul class="tf-social-icon">
-                                        @foreach($mediaPlatforms as $index => $platformId)
-                                            @if(!empty($mediaLinks[$index]) && isset($socialIcons[$platformId])) 
-                                                <li>
-                                                    <a href="{{ $mediaLinks[$index] }}" class="{{ $socialIcons[$platformId]['class'] }}" aria-label="{{ $socialIcons[$platformId]['label'] }}">
-                                                        <i class="icon {{ $socialIcons[$platformId]['icon'] }}"></i>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="footer-menu">
-                                <div class="footer-col-block">
-                                    <div class="footer-heading text-button footer-heading-mobile">
-                                        Information
-                                    </div>
-                                    <div class="tf-collapse-content">
-                                        <ul class="footer-menu-list">
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('frontend.about.us') }}" class="footer-menu_item">About Us</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('contact.us') }}" class="footer-menu_item">Contact us</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('shipping.delivery') }}" class="footer-menu_item">Shipping & Delivery</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('return.refunds') }}" class="footer-menu_item">Return & Refunds</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('privacy.policy') }}" class="footer-menu_item">Privacy Policy</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="{{ route('terms.condition') }}" class="footer-menu_item">Terms of Service</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                @php
-                                    use Illuminate\Support\Facades\DB;
-                                    $categories = DB::table('master_product_category')
-                                        ->whereNull('deleted_by')
-                                        ->orderBy('id', 'asc')
-                                        ->get();
-                                @endphp
-
-                                <div class="footer-col-block">
-                                    <div class="footer-heading text-button footer-heading-mobile">
-                                        Category
-                                    </div>
-                                    <div class="tf-collapse-content">
-                                        <ul class="footer-menu-list">
-                                            @foreach ($categories as $category)
-                                                <li class="text-caption-1">
-                                                    <a href="{{ route('product.category', ['slug' => $category->slug]) }}" class="footer-menu_item">
-                                                        {{ $category->category_name }}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="footer-col-block">
-                                <div class="footer-heading text-button footer-heading-mobile">
-                                    Newsletter
-                                </div>
-                                <div class="tf-collapse-content">
-                                    <div class="footer-newsletter">
-                                        <p class="text-caption-1">Sign up for our newsletter and get your first purchase</p>
-                                        <form id="subscribe-form" action="#" class="form-newsletter subscribe-form" method="post" accept-charset="utf-8" data-mailchimp="true">
-                                            <div id="subscribe-content" class="subscribe-content">
-                                                <fieldset class="email">
-                                                    <input id="subscribe-email" type="email" name="email-form" class="subscribe-email" placeholder="Enter your e-mail" tabindex="0" aria-required="true">
-                                                </fieldset>
-                                                <div class="button-submit">
-                                                    <button id="subscribe-button" class="subscribe-button" type="button" aria-label="Subscribe">
-                                                        <i class="icon icon-arrowUpRight"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div id="subscribe-msg" class="subscribe-msg"></div>
-                                        </form>
-                                        <div class="tf-cart-checkbox">
-                                            <div class="tf-checkbox-wrapp">
-                                                <input class="" type="checkbox" id="footer-Form_agree" name="agree_checkbox">
-                                                <div>
-                                                    <i class="icon-check"></i>
-                                                </div>
-                                            </div>
-                                            <label class="text-caption-1" for="footer-Form_agree">
-                                                By clicking subscribe, you agree to the <a class="fw-6 link" href="#">Terms of Service</a> and <a class="fw-6 link" href="#">Privacy Policy</a>.
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
+ <div class="cta-footer-bg">
+    <div class="cta4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="cta-content-bg">
+              <div class="row align-items-center">
+                <div class="col-lg-6">
+                  <div class="heading1">
+                    <h3>Subscribe to Our Newsletter</h3>
+                  </div>
                 </div>
-            </div>
-
-                <div class="footer-bottom">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="footer-bottom-wrap">
-                                    <div class="left">
-                                        <p class="text-caption-1">Copyright © 2025 Murupp. All rights reserved. Designed By <a href="https://www.matrixbricks.com/" target="_bl">Matrix Bricks</a></p>
-                                    </div>
-                                    <div class="tf-payment">
-                                        <p class="text-caption-1">Payment:</p>
-                                        <ul>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/american-express.png') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/visa.png') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/Bhim_upi.webp') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/gpay-icon.webp') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/mastercard.jpg') }}" alt="">
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('frontend/assets/images/payment/paypal.png') }}" alt="">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-5">
+                  <div class="images">
+                    <form>
+                      <input type="text" placeholder="Enter Your Email">
+                      <button type="submit" class="vl-btn5">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
-        </footer>
-        <!-- /Footer -->
-
-        <a href="https://web.whatsapp.com/" class="float" target="_blank">
-            <i class="fab fa-whatsapp my-float"></i>
-        </a>
-
-        <!-- Include Notyf CSS & JS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.css" type="text/css" media="all">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js"></script>
-
-
-         <!-- Wishlist Ajax Funtion -->
-        <script>
-
-            var notyf = new Notyf({
-                duration: 5000, 
-                ripple: true, 
-                position: {
-                    x: 'right',
-                    y: 'top',
-                },
-                dismissible: true,
-                types: [
-                    {
-                        type: 'custom-success',
-                        background: 'black',  
-                        icon: {
-                            className: 'fa fa-check-circle', 
-                            tagName: 'i',
-                            color: 'white' 
-                        }
-                    }
-                ]
-            });
-
-            function addToWishlist(productId, element) {
-                $.ajax({
-                    url: "{{ route('wishlist.add', '') }}/" + productId,
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        product_id: productId
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $(element).find('.icon').removeClass('icon-heart').addClass('icon-heart-filled');
-                            $(element).addClass('active');
-
-                            notyf.open({
-                                type: 'custom-success',
-                                message: response.message
-                            });
-                        } else {
-                            notyf.open({
-                                type: 'warning',
-                                message: response.message
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        notyf.error("Something went wrong. Please try again.");
-                    }
-                });
-            }
-        </script>
-
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vl-footer4-section-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-logo1">
+              <img src="assets/img/logo/DKT.png" alt="">
+              <img src="assets/img/logo/Healthcare-Logo.png" alt="">
+              <div class="space16"></div>
+              <p>People are Free, Sex is Great, Children when Wanted.</p>
+              <div class="space24"></div>
+              <ul>
+                <li><a href="https://www.linkedin.com/company/dkt-india"><i class="fa-brands fa-linkedin-in"></i></a>
+                </li>
+                <li><a href="https://www.youtube.com/@DKTINDIA_Official" class="m-0"><i
+                      class="fa-brands fa-youtube"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="vl-footer-widget contact">
+              <div class="space30 d-lg-none d-block"></div>
+              <h3>Contact Us</h3>
+              <div class="space6"></div>
+              <ul>
+                <li><a href="https://maps.app.goo.gl/H91of4Yvii1VDCkAA" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 14C11.2089 14 10.4355 13.7654 9.77772 13.3259C9.11992 12.8864 8.60723 12.2616 8.30448 11.5307C8.00173 10.7998 7.92252 9.99556 8.07686 9.21964C8.2312 8.44372 8.61216 7.73098 9.17157 7.17157C9.73098 6.61216 10.4437 6.2312 11.2196 6.07686C11.9956 5.92252 12.7998 6.00173 13.5307 6.30448C14.2616 6.60723 14.8864 7.11992 15.3259 7.77772C15.7654 8.43552 16 9.20888 16 10C15.9987 11.0605 15.5769 12.0772 14.827 12.827C14.0772 13.5769 13.0605 13.9987 12 14ZM12 7.6C11.5253 7.6 11.0613 7.74076 10.6666 8.00447C10.272 8.26819 9.96434 8.64302 9.78269 9.08156C9.60104 9.5201 9.55351 10.0027 9.64612 10.4682C9.73872 10.9338 9.9673 11.3614 10.3029 11.6971C10.6386 12.0327 11.0662 12.2613 11.5318 12.3539C11.9973 12.4465 12.4799 12.399 12.9184 12.2173C13.357 12.0357 13.7318 11.728 13.9955 11.3334C14.2592 10.9387 14.4 10.4747 14.4 10C14.3994 9.36368 14.1463 8.7536 13.6964 8.30365C13.2464 7.8537 12.6363 7.60064 12 7.6Z"
+                        fill="#676B74"></path>
+                      <path
+                        d="M12 23L5.86473 15.5382C5.77948 15.4262 5.69511 15.3135 5.61164 15.2C4.56416 13.776 3.99805 12.0373 4.00001 10.25C4.00001 8.06196 4.84286 5.96354 6.34315 4.41637C7.84344 2.86919 9.87827 2 12 2C14.1217 2 16.1566 2.86919 17.6569 4.41637C19.1571 5.96354 20 8.06196 20 10.25C20.0017 12.0365 19.4359 13.7743 18.3891 15.1978L18.3884 15.2C18.3884 15.2 18.1702 15.4955 18.1375 15.5353L12 23ZM6.77309 14.2963C6.77309 14.2963 6.94255 14.5272 6.98109 14.5767L12 20.681L17.0255 14.5685C17.0575 14.5272 17.2276 14.2948 17.2284 14.294C18.0845 13.1309 18.5472 11.7103 18.5455 10.25C18.5455 8.45979 17.8558 6.7429 16.6283 5.47703C15.4008 4.21116 13.736 3.5 12 3.5C10.264 3.5 8.59918 4.21116 7.37167 5.47703C6.14416 6.7429 5.45455 8.45979 5.45455 10.25C5.45276 11.7112 5.91596 13.1327 6.77309 14.2963Z"
+                        fill="#676B74"></path>
+                    </svg> Hem-Dil, 67 A, Linking Road, Opp. St. Lawrence High School, Santacruz (W), Mumbai – 400
+                    054</a></li>
+                <li><a href="tel:+91-22-35358900"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M19.95 21C17.8667 21 15.8083 20.546 13.775 19.638C11.7417 18.73 9.89167 17.4423 8.225 15.775C6.55833 14.1077 5.271 12.2577 4.363 10.225C3.455 8.19233 3.00067 6.134 3 4.05C3 3.75 3.1 3.5 3.3 3.3C3.5 3.1 3.75 3 4.05 3H8.1C8.33333 3 8.54167 3.07933 8.725 3.238C8.90833 3.39667 9.01667 3.584 9.05 3.8L9.7 7.3C9.73333 7.56667 9.725 7.79167 9.675 7.975C9.625 8.15833 9.53333 8.31667 9.4 8.45L6.975 10.9C7.30833 11.5167 7.704 12.1123 8.162 12.687C8.62 13.2617 9.12433 13.816 9.675 14.35C10.1917 14.8667 10.7333 15.346 11.3 15.788C11.8667 16.23 12.4667 16.634 13.1 17L15.45 14.65C15.6 14.5 15.796 14.3877 16.038 14.313C16.28 14.2383 16.5173 14.2173 16.75 14.25L20.2 14.95C20.4333 15.0167 20.625 15.1377 20.775 15.313C20.925 15.4883 21 15.684 21 15.9V19.95C21 20.25 20.9 20.5 20.7 20.7C20.5 20.9 20.25 21 19.95 21Z"
+                        fill="#676B74"></path>
+                    </svg> +91-22-35358900</a> / <a href="tel:+912235358930">35358930</a>-<a href="tel:+912235358935">35</a></li>
+                <li><a href="mailto:customercare@dktindia.org"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                      height="24" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M21.5 5H3.5C3.10218 5 2.72064 5.15804 2.43934 5.43934C2.15804 5.72064 2 6.10218 2 6.5V18.5C2 18.8978 2.15804 19.2794 2.43934 19.5607C2.72064 19.842 3.10218 20 3.5 20H21.5C21.8978 20 22.2794 19.842 22.5607 19.5607C22.842 19.2794 23 18.8978 23 18.5V6.5C23 6.10218 22.842 5.72064 22.5607 5.43934C22.2794 5.15804 21.8978 5 21.5 5ZM19.85 6.5L12.5 11.585L5.15 6.5H19.85ZM3.5 18.5V7.1825L12.0725 13.115C12.198 13.2021 12.3472 13.2488 12.5 13.2488C12.6528 13.2488 12.802 13.2021 12.9275 13.115L21.5 7.1825V18.5H3.5Z"
+                        fill="#676B74"></path>
+                    </svg> customercare@dktindia.org</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="space30 d-md-none d-block"></div>
+            <div class="vl-footer-widget first-padding">
+              <h3>Quick Links</h3>
+              <div class="space6"></div>
+              <ul>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="#">Press Release</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="join-us.html">Join Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="space30 d-md-none d-block"></div>
+            <div class="vl-footer-widget first-padding">
+              <h3>Products</h3>
+              <div class="space6"></div>
+              <ul>
+                <li><a href="category.html">Abortion / PPH</a></li>
+                <li><a href="#">Condoms</a></li>
+                <li><a href="#">Injectable Contraceptives</a></li>
+                <li><a href="#">IUCDs</a></li>
+                <li><a href="#">LNG IUS</a></li>
+                <li><a href="#">OCPs & ECPs</a></li>
+                <li><a href="#">Supplements</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="space40"></div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="vl-copyright-area">
+              <p>ⓒ Copyright 2025 DKT India. All right reserved | Designed & Developed By <a
+                  href="https://www.matrixbricks.com/" target="_blank">Matrix Bricks</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -14,7 +14,7 @@ use App\Http\Controllers\Backend\HomeVisionController;
 use App\Http\Controllers\Backend\AboutController;
 
 
-
+use App\Http\Controllers\Frontend\HomeController;;
 
 // =========================================================================== Backend Routes
 
@@ -72,3 +72,16 @@ Route::resource('manage-vision', HomeVisionController::class);
 
 // ==== Manage About Us
 Route::resource('manage-about-us', AboutController::class);
+
+
+
+
+
+// ======================= Frontend
+
+Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
+
+    // ==== Home
+    Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+
+});

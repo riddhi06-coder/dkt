@@ -75,10 +75,10 @@
                   <i class="fa fa-thumb-tack"></i>
                   <a class="sidebar-link" href="{{ route('manage-about-us.index') }}">
                     <svg class="stroke-icon"> 
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#customers') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-widget') }}"></use>
                     </svg>
                     <svg class="fill-icon">
-                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#customers') }}"></use>
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-widget') }}"></use>
                     </svg>
                     <span>About Us</span>
                   </a>
