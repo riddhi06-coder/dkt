@@ -84,4 +84,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== Home
     Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
 
+    // ==== About us
+    Route::get('/about-us', [HomeController::class, 'about_us'])->name('frontend.about_us');
+
 });

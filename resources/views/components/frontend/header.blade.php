@@ -27,8 +27,8 @@
             <div class="vl-main-menu text-center">
               <nav class="vl-mobile-menu-active">
                 <ul>
-                  <li><a href="./">Home</a></li>
-                  <li><a href="about-us.html">About Us</a></li>
+                  <li><a href="{{ route('frontend.index') }}">Home</a></li>
+                  <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
                   <li><a href="#">Products <span><i class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
                     <ul class="sub-menu">
 

@@ -28,4 +28,8 @@ class HomeController extends Controller
         return view('frontend.index', compact('homeBanners','intro','productCategories','socialGallery','visionMissions'));
     }
 
+
+    public function about_us() {
+        return view('frontend.about_us');
+    }
 }
