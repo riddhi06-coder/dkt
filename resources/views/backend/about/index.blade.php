@@ -56,13 +56,36 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Product Category</th>
-                                <th>Thumbnail Image</th>
+                                <th>Banner Heading</th>
+                                <th>Banner Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            
+                              @foreach($aboutUs as $key => $about)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $about->banner_heading }}</td>
+                                    <td>
+                                        @if($about->banner)
+                                            <img src="{{ asset('uploads/about/' . $about->banner) }}" 
+                                                alt="Banner Image" 
+                                                width="150px" class="img-thumbnail">
+                                        @else
+                                            <span class="text-muted">No Image</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('manage-about-us.edit', $about->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('manage-about-us.destroy', $about->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                                
                             </tbody>
                         </table>
