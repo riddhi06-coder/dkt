@@ -24,4 +24,10 @@ class Products extends Model
         'deleted_at',
         'deleted_by',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\ProductCategory::class, 'category_id');
+    }
+
 }

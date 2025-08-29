@@ -23,117 +23,86 @@
               <a href="./"><img src="{{ asset('frontend/assets/img/logo/DKT.png') }}" alt=""></a>
             </div>
           </div>
-          <div class="col-lg-10 d-none d-lg-block">
-            <div class="vl-main-menu text-center">
-              <nav class="vl-mobile-menu-active">
-                <ul>
-                  <li><a href="{{ route('frontend.index') }}">Home</a></li>
-                  <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
-                  <li><a href="#">Products <span><i class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
-                    <ul class="sub-menu">
 
-                      <!-- Abortion/ PPH -->
-                      <li><a href="category.html" class="span-arrow">Abortion / PPH <span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="product-details.html">A-Kare</a></li>
-                          <li><a href="#">Miso-Kare</a></li>
-                          <li><a href="#">MVA-Kare</a></li>
+              <div class="col-lg-10 d-none d-lg-block">
+                <div class="vl-main-menu text-center">
+                  <nav class="vl-mobile-menu-active">
+                    <ul>
+                      <li><a href="{{ route('frontend.index') }}">Home</a></li>
+                      <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
+
+                      <li>
+                          <a href="{{ route('frontend.product_list') }}">Products <span><i class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
+                          <ul class="sub-menu">
+
+                              @php
+                                  $categories = \App\Models\ProductCategory::with([
+                                      'products' => function($q) {
+                                          $q->whereNull('deleted_by');
+                                      },
+                                      'details'
+                                  ])
+                                  ->whereNull('deleted_by')
+                                  ->get();
+                              @endphp
+
+
+                              @foreach($categories as $category)
+                                  <li>
+                                      <a href="{{ route('frontend.category_details', $category->slug) }}" class="span-arrow">
+                                          {{ $category->category_name }}
+                                          @if($category->products->count() > 0)
+                                              <span><i class="fa-solid fa-angle-right d-lg-block d-none"></i></span>
+                                          @endif
+                                      </a>
+
+                                      @if($category->products->count() > 0)
+                                          <ul class="sub-menu menu1">
+                                              @foreach($category->products as $product)
+                                                  <li>
+                                                      <a href="#">
+                                                          {{ $product->product_name }}
+                                                      </a>
+                                                  </li>
+                                              @endforeach
+                                          </ul>
+                                      @endif
+                                  </li>
+                              @endforeach
+
+                          </ul>
+                      </li>
+
+                      <li><a href="#">HerKare Academy</a></li>
+
+                      <li class="has-dropdown">
+                        <a href="#">News & Media <span><i class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Press Releases</a></li>
+                          <li><a href="#">Blogs</a></li>
                         </ul>
                       </li>
 
-                      <!-- Condoms -->
-                      <li><a href="#" class="span-arrow">Condoms <span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <!-- <li><a href="#">Fiesta</a></li> -->
-                          <li><a href="#">TimeMax Extra Dots Condoms</a></li>
-                          <li><a href="#">Zaroor</a></li>
-                          <li><a href="#">Zaroor + TimeMax</a></li>
+                      <li class="has-dropdown">
+                        <a href="#">Partner With Us <span><i
+                              class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
+                        <ul class="sub-menu">
+                          <li><a href="i-am-a-doctor.html">I am a Doctor</a></li>
+                          <li><a href="i-am-a-chemist.html">I am a Chemist</a></li>
+                          <li><a href="i-am-a-distributor.html">I am a Distributor</a></li>
                         </ul>
                       </li>
 
-                      <!-- Injectable Contraceptives -->
-                      <li><a href="#" class="span-arrow">Injectable Contraceptives<span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="#">Depo-Kare</a></li>
-                        </ul>
-                      </li>
-
-                      <!-- IUCDs -->
-                      <li><a href="#" class="span-arrow">IUCDs<span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="#">E-zee Load</a></li>
-                          <li><a href="#">Sterling Mini Cu 380 Ag</a></li>
-                          <li><a href="#">U-Kare 250</a></li>
-                          <li><a href="#">U-Kare Cu 375</a></li>
-                          <li><a href="#">U-Kare Sleek 250</a></li>
-                          <li><a href="#">U-Kare Sleek 375</a></li>
-                        </ul>
-                      </li>
-
-                      <!-- LNG IUS -->
-                      <li><a href="#" class="span-arrow">LNG IUS<span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="#">Emirelle</a></li>
-                        </ul>
-                      </li>
-
-                      <!-- Oral & Emergency Contraceptive Pills -->
-                      <li><a href="#" class="span-arrow">Oral Contraceptive Pills (OCPs) & Emergency Contraceptive Pills
-                          (ECPs) <span><i class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="#">Choice Pill (OCP)</a></li>
-                          <li><a href="#">Choice-72 (ECP)</a></li>
-                          <li><a href="#">Cypo-Kare</a></li>
-                          <li><a href="#">Drosi-Kare</a></li>
-                          <li><a href="#">Gesto-Kare</a></li>
-                          <li><a href="#">Le-Kare</a></li>
-                        </ul>
-                      </li>
-
-                      <!-- Supplements -->
-                      <li><a href="#" class="span-arrow">Supplements<span><i
-                              class="fa-solid fa-angle-right d-lg-block d-none"></i></span></a>
-                        <ul class="sub-menu menu1">
-                          <li><a href="#">Calci-Kare</a></li>
-                          <li><a href="#">FE-Kare</a></li>
-                        </ul>
-                      </li>
-
+                      <li><a href="join-us.html">Join Us</a></li>
+                      <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                  </li>
+                  </nav>
+                </div>
+              </div>
 
-                  <!-- <li><a href="#">Social Impact</a></li> -->
-                  <li><a href="#">HerKare Academy</a></li>
-                  <li class="has-dropdown">
-                    <a href="#">News & Media <span><i class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
-                    <ul class="sub-menu">
-                      <li><a href="#">Press Releases</a></li>
-                      <li><a href="#">Blogs</a></li>
-                    </ul>
-                  </li>
-                  <li class="has-dropdown">
-                    <a href="#">Partner With Us <span><i
-                          class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
-                    <ul class="sub-menu">
-                      <li><a href="i-am-a-doctor.html">I am a Doctor</a></li>
-                      <li><a href="i-am-a-chemist.html">I am a Chemist</a></li>
-                      <li><a href="i-am-a-distributor.html">I am a Distributor</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="join-us.html">Join Us</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-                        <div class="col-lg-1 col-md-6 col-6">
+              <div class="col-lg-1 col-md-6 col-6">
                 <div class="vl-logo-right">
-                      <a href="#"><img src="assets/img/logo/Healthcare-Logo.png" alt=""></a>
+                      <a href="#"><img src="{{ asset('frontend/assets/img/logo/Healthcare-Logo.png') }}" alt=""></a>
                   </div>
                   <div class="vl-header-action-item d-block d-lg-none">
                       <button type="button" class="vl-offcanvas-toggle">
@@ -151,7 +120,7 @@
         <div class="vl-offcanvas-wrapper">
             <div class="vl-offcanvas-header d-flex justify-content-between align-items-center mb-90">
                 <div class="vl-offcanvas-logo">
-                    <a href="index.html"><img src="assets/img/logo/dkt-white.webp" alt=""></a>
+                    <a href="{{ route('frontend.index') }}"><img src="{{ asset('frontend/assets/img/logo/dkt-white.webp') }}" alt=""></a>
                 </div>
                 <div class="vl-offcanvas-close">
                 <button class="vl-offcanvas-close-toggle"><i class="fa-solid fa-xmark"></i></button>
