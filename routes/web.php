@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\HomeIntroDetailsController;
 use App\Http\Controllers\Backend\HomeSocialDetailsController;
 use App\Http\Controllers\Backend\HomeVisionController;
 use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\PrivacyController;
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -72,6 +73,9 @@ Route::resource('manage-vision', HomeVisionController::class);
 
 // ==== Manage About Us
 Route::resource('manage-about-us', AboutController::class);
+
+// ==== Manage Privacy Policy
+Route::resource('manage-privacy-policy', PrivacyController::class);
 
 
 

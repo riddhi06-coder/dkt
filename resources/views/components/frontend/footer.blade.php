@@ -30,8 +30,8 @@
         <div class="row">
           <div class="col-lg-3 col-md-6">
             <div class="footer-logo1">
-              <img src="assets/img/logo/DKT.png" alt="">
-              <img src="assets/img/logo/Healthcare-Logo.png" alt="">
+              <img src="{{ asset('frontend/assets/img/logo/DKT.png') }}" alt="">
+              <img src="{{ asset('frontend/assets/img/logo/Healthcare-Logo.png') }}" alt="">
               <div class="space16"></div>
               <p>People are Free, Sex is Great, Children when Wanted.</p>
               <div class="space24"></div>
