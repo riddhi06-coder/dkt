@@ -93,5 +93,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== Category Details
     Route::get('/category-details/{slug}', [HomeController::class, 'category_details'])->name('frontend.category_details');
 
+    // Product details page
+    Route::get('/product-details/{slug}', [HomeController::class, 'product_details'])->name('frontend.product_details');
 
 });

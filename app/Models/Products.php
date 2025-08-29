@@ -30,4 +30,10 @@ class Products extends Model
         return $this->belongsTo(\App\Models\ProductCategory::class, 'category_id');
     }
 
+    public function details()
+    {
+        return $this->hasOne(CategoryDetails::class, 'category_id', 'category_id')
+                    ->whereNull('deleted_by'); // only active details
+    }
+
 }

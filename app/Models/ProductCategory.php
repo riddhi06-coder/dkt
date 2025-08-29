@@ -37,7 +37,8 @@ class ProductCategory extends Model
 
     public function details()
     {
-        return $this->hasOne(CategoryDetails::class, 'category_id', 'id');
+        return $this->hasOne(CategoryDetails::class, 'category_id', 'id')
+                    ->whereNull('deleted_by'); // only active details
     }
 
 

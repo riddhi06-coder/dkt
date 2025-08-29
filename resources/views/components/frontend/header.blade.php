@@ -60,7 +60,7 @@
                                           <ul class="sub-menu menu1">
                                               @foreach($category->products as $product)
                                                   <li>
-                                                      <a href="#">
+                                                      <a href="{{ route('frontend.product_details', $product->slug ?? '#') }}">
                                                           {{ $product->product_name }}
                                                       </a>
                                                   </li>

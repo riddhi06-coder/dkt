@@ -15,6 +15,7 @@ use App\Models\HomeSocial;
 use App\Models\VisionMission;
 use App\Models\AboutUs;
 use App\Models\Products;
+use App\Models\ProductDetails;
 
 class HomeController extends Controller
 {
@@ -70,6 +71,41 @@ class HomeController extends Controller
         $product_list = Products::whereNull('deleted_by')->orderBy('inserted_at', 'asc')->get(); 
         return view('frontend.product_list', compact('product_list'));
     }
+
+    // Product details
+    public function product_details($slug)
+    {
+        $product = DB::table('product_details as pd')
+            ->leftJoin('products as p', 'pd.product_id', '=', 'p.id')
+            ->leftJoin('product_category as c', 'p.category_id', '=', 'c.id')
+            ->select(
+                'pd.id as detail_id',
+                'pd.product_id',
+                'pd.thumbnail_image as detail_thumbnail',
+                'pd.product_image',
+                'pd.buy_now',
+                'pd.description',
+                'pd.use_of_tablet',
+                'pd.direction_to_use',
+                'pd.composition',
+                'p.product_name',
+                'p.slug as product_slug',
+                'c.category_name',
+                'c.slug as category_slug'
+            )
+            ->where('p.slug', $slug)
+            ->whereNull('pd.deleted_by')
+            ->first();
+
+        if (!$product) {
+            abort(404);
+        }
+
+        return view('frontend.product_details', compact('product'));
+    }
+
+
+
 
 
 }
