@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\HomeVisionController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\PrivacyController;
 use App\Http\Controllers\Backend\TermsController;
+use App\Http\Controllers\Backend\ContactController;
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -80,6 +81,9 @@ Route::resource('manage-privacy-policy', PrivacyController::class);
 
 // ==== Manage Privacy Policy
 Route::resource('manage-terms-condition', TermsController::class);
+
+// ==== Manage COntact Details
+Route::resource('manage-contact-details', ContactController::class);
 
 
 
