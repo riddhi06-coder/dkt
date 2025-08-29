@@ -92,7 +92,7 @@
 
                         <div class="space24"></div>
                         <div class="btn-area1">
-                            <a href="javascript:void(0)" class="vl-btn2">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="{{ route('frontend.about_us') }}" class="vl-btn2">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                             @if($intro && $intro->results_image)
                                 <a href="{{ asset('uploads/home/' . $intro->results_image) }}" class="vl-btn2 image-popup-vertical-fit">
                                     2024 Results <i class="fa-solid fa-arrow-right"></i>
@@ -161,7 +161,7 @@
 
             <div class="col-lg-3">
                 <div class="btn-area1 text-end d-none d-lg-block">
-                <a href="#" class="vl-btn2">Discover Products<i class="fa-solid fa-arrow-right"></i></a>
+                <a href="{{ route('frontend.product_list') }}" class="vl-btn2">Discover Products<i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
             </div>
@@ -176,12 +176,12 @@
                                         alt="{{ $category->category_name }}">
                                 </div>
                                 <div class="content-area">
-                                    <a href="#" class="title">{{ $category->category_name }}</a>
+                                    <a href="{{ route('frontend.category_details', $category->slug) }}" class="title">{{ $category->category_name }}</a>
                                     <div class="space10"></div>
                                     <p>{{ $category->description }}</p>
                                     <div class="space28"></div>
                                     <div class="btn-area1">
-                                        <a href="#" class="vl-btn6">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="{{ route('frontend.category_details', $category->slug) }}" class="vl-btn6">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
             </div>
             <div class="row d-block d-lg-none mt-4 text-center">
             <div class="col-12">
-                <a href="#" class="vl-btn2">Discover Products <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="{{ route('frontend.product_list') }}" class="vl-btn2">Discover Products <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             </div>
         </div>
