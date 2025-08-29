@@ -92,19 +92,28 @@
           </div>
           <div class="col-lg-2 col-md-6">
             <div class="space30 d-md-none d-block"></div>
+
             <div class="vl-footer-widget first-padding">
-              <h3>Products</h3>
-              <div class="space6"></div>
-              <ul>
-                <li><a href="category.html">Abortion / PPH</a></li>
-                <li><a href="#">Condoms</a></li>
-                <li><a href="#">Injectable Contraceptives</a></li>
-                <li><a href="#">IUCDs</a></li>
-                <li><a href="#">LNG IUS</a></li>
-                <li><a href="#">OCPs & ECPs</a></li>
-                <li><a href="#">Supplements</a></li>
-              </ul>
+                <h3>Products</h3>
+                <div class="space6"></div>
+                <ul>
+                    @php
+                        $categories = \App\Models\ProductCategory::whereNull('deleted_by')->get();
+                    @endphp
+
+                    @forelse($categories as $category)
+                        <li>
+                            <a href="{{ route('frontend.category_details', $category->slug) }}">
+                                {{ $category->category_name }}
+                            </a>
+                        </li>
+                    @empty
+                        <li>No categories available.</li>
+                    @endforelse
+                </ul>
             </div>
+
+
           </div>
         </div>
         <div class="space40"></div>

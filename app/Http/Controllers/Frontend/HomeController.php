@@ -69,7 +69,6 @@ class HomeController extends Controller
     public function product_list()
     {
         $product_list = ProductCategory::whereNull('deleted_by')->orderBy('inserted_at', 'asc')->get(); 
-        // dd($product_list);
         return view('frontend.product_list', compact('product_list'));
     }
 
