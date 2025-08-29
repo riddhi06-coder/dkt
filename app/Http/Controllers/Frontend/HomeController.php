@@ -13,6 +13,7 @@ use App\Models\HomeIntro;
 use App\Models\ProductCategory;
 use App\Models\HomeSocial;
 use App\Models\VisionMission;
+use App\Models\AboutUs;
 
 
 class HomeController extends Controller
@@ -28,8 +29,14 @@ class HomeController extends Controller
         return view('frontend.index', compact('homeBanners','intro','productCategories','socialGallery','visionMissions'));
     }
 
+    // === About
+    public function about_us()
+    {
+        // ✅ Fetch latest About Us entry
+        $about = AboutUs::wherenull('deleted_by')->first();
+        $visionMissions = VisionMission::whereNull('deleted_by')->orderBy('inserted_at', 'asc')->get(); 
 
-    public function about_us() {
-        return view('frontend.about_us');
+        return view('frontend.about_us', compact('about','visionMissions'));
     }
+
 }
