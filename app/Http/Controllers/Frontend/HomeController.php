@@ -16,6 +16,8 @@ use App\Models\VisionMission;
 use App\Models\AboutUs;
 use App\Models\Products;
 use App\Models\ProductDetails;
+use App\Models\PrivacyPolicy;
+use App\Models\Terms;
 
 class HomeController extends Controller
 {
@@ -104,6 +106,18 @@ class HomeController extends Controller
         return view('frontend.product_details', compact('product'));
     }
 
+    // === Privacy Policy
+    public function privacy_policy() {
+        $privacy_policy = PrivacyPolicy::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
+        return view('frontend.privacy_policy', compact('privacy_policy'));
+    }
+
+
+    // === Terms & Condition
+    public function terms_condition() {
+        $terms_condition = Terms::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
+        return view('frontend.terms_condition', compact('terms_condition'));
+    }
 
 
 

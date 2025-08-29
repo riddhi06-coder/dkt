@@ -80,13 +80,13 @@
               <h3>Quick Links</h3>
               <div class="space6"></div>
               <ul>
-                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
                 <li><a href="#">Press Release</a></li>
                 <li><a href="#">Blogs</a></li>
                 <li><a href="join-us.html">Join Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="{{ route('frontend.terms_condition') }}">Terms & Conditions</a></li>
+                <li><a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a></li>
               </ul>
             </div>
           </div>

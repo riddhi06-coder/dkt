@@ -17,14 +17,14 @@
             <div class="page-title">
               <div class="row">
                 <div class="col-6">
-                  <h4>Edit Privacy Policy Form</h4>
+                  <h4>Edit Terms & Condition Form</h4>
                 </div>
                 <div class="col-6">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                    <a href="{{ route('manage-privacy-policy.index') }}">Home</a>
+                    <a href="{{ route('manage-terms-condition.index') }}">Home</a>
                     </li>
-                    <li class="breadcrumb-item active">Edit Privacy Policy</li>
+                    <li class="breadcrumb-item active">Edit Terms & Condition</li>
                 </ol>
 
                 </div>
@@ -37,7 +37,7 @@
                 <div class="col-md-12">
                     <div class="card">
                     <div class="card-header">
-                        <h4>Privacy Policy Form</h4>
+                        <h4>Terms & Condition Form</h4>
                         <p class="f-m-light mt-1">Fill up your true details and submit the form.</p>
                     </div>
                     <div class="card-body">
@@ -49,7 +49,7 @@
                                 <div class="tab-pane fade show active" id="wizard-contact" role="tabpanel" aria-labelledby="wizard-contact-tab">
                                     <form class="row g-3 needs-validation custom-input" 
                                         novalidate 
-                                        action="{{ route('manage-privacy-policy.update', $PrivacyPolicy->id) }}" 
+                                        action="{{ route('manage-terms-condition.update', $PrivacyPolicy->id) }}" 
                                         method="POST" 
                                         enctype="multipart/form-data">
 
@@ -120,7 +120,7 @@
 
                                         <!-- Form Actions -->
                                         <div class="col-12 text-end">
-                                            <a href="{{ route('manage-privacy-policy.index') }}" class="btn btn-danger px-4">Cancel</a>
+                                            <a href="{{ route('manage-terms-condition.index') }}" class="btn btn-danger px-4">Cancel</a>
                                             <button class="btn btn-primary" type="submit">Update</button>
                                         </div>
                                     </form>

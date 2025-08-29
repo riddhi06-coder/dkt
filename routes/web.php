@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\HomeSocialDetailsController;
 use App\Http\Controllers\Backend\HomeVisionController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\PrivacyController;
+use App\Http\Controllers\Backend\TermsController;
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -77,6 +78,9 @@ Route::resource('manage-about-us', AboutController::class);
 // ==== Manage Privacy Policy
 Route::resource('manage-privacy-policy', PrivacyController::class);
 
+// ==== Manage Privacy Policy
+Route::resource('manage-terms-condition', TermsController::class);
+
 
 
 
@@ -93,6 +97,12 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
 
     // ==== All Products List
     Route::get('/product-list', [HomeController::class, 'product_list'])->name('frontend.product_list');
+
+    // ==== All Terms & Condition
+    Route::get('/terms-and-conditions', [HomeController::class, 'terms_condition'])->name('frontend.terms_condition');
+
+    // ==== All Privacy Policy
+    Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('frontend.privacy_policy');
 
     // ==== Category Details
     Route::get('/category-details/{slug}', [HomeController::class, 'category_details'])->name('frontend.category_details');

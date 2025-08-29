@@ -78,7 +78,7 @@
 
                                         <div class="col-md-12" style="margin-bottom: 20px;">
                                             <label class="form-label" for="description">Privcay Policy <span class="txt-danger">*</span></label>
-                                            <textarea id="editor" class="form-control" name="description" rows="5" placeholder="Enter Privcay Policy here" required value="{{ old('description') }}"></textarea>
+                                            <textarea id="summernote" class="form-control" name="description" rows="5" placeholder="Enter Privcay Policy here" required value="{{ old('description') }}"></textarea>
                                             <div class="invalid-feedback">Please enter Privcay Policy here.</div>
                                         </div>
 
