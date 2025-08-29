@@ -33,36 +33,34 @@
         <div class="service5 sp2" style="margin-top: 25px !important;">
             <div class="container">
                 <div class="row">
-                    @forelse($product_list as $index => $product)
-                        <div class="col-lg-4 col-md-6 mb-4"  {{-- add mb-4 for vertical spacing --}}
-                            data-aos="fade-up"
-                            data-aos-duration="900"
-                            data-aos-offset="{{ 100 + ($index * 60) }}">
-                            <div class="service5-boxarea h-100"> {{-- optional: h-100 keeps boxes equal height --}}
-                                <div class="img1">
-                                    <img src="{{ asset('uploads/products/'.$product->thumbnail_image) }}" 
-                                        alt="{{ $product->product_name }}">
-                                </div>
-                                <div class="content-area">
-                                    <a href="#" class="title">{{ $product->product_name }}</a>
-                                    <div class="space28"></div>
-                                    <div class="btn-area1">
-                                        <a href="#" class="vl-btn6">
-                                            Learn More <i class="fa-solid fa-arrow-right"></i>
-                                        </a>
-                                    </div>
+                @forelse($product_list as $category) 
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="service5-boxarea h-100">
+                            <div class="img1">
+                                <img src="{{ asset('uploads/products/'.$category->thumbnail_image) }}" 
+                                    alt="{{ $category->category_name }}">
+                            </div>
+                            <div class="content-area">
+                                <a href="{{ route('frontend.category_details', $category->slug) }}" class="title">
+                                    {{ $category->category_name }}
+                                </a>
+                                <div class="space28"></div>
+                                <div class="btn-area1">
+                                    <a href="{{ route('frontend.category_details', $category->slug) }}" class="vl-btn6">
+                                        Learn More <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    @empty
-                        <div class="col-12">
-                            <p>No products available.</p>
-                        </div>
-                    @endforelse
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <p>No categories available.</p>
+                    </div>
+                @endforelse
                 </div>
             </div>
         </div>
-
 
     @include('components.frontend.footer')
 

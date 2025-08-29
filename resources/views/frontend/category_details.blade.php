@@ -57,7 +57,7 @@
     <!--===== ABOUT AREA ENDS =======-->
 
     <!--===== SERVICE AREA STARTS =======-->
-        @if(!empty($category->details->description) && $category->products->count())
+       @if(!empty($category->details->description) && $category->products->count())
             <div class="service5 sp2">
                 <div class="container">
                     <div class="row">
@@ -72,10 +72,12 @@
                                             alt="{{ $product->product_name }}">
                                     </div>
                                     <div class="content-area">
-                                        <a href="#" class="title">{{ $product->product_name }}</a>
+                                        <a href="{{ route('frontend.product_details', $product->slug) }}" class="title">
+                                            {{ $product->product_name }}
+                                        </a>
                                         <div class="space28"></div>
                                         <div class="btn-area1">
-                                            <a href="#" class="vl-btn6">
+                                            <a href="{{ route('frontend.product_details', $product->slug) }}" class="vl-btn6">
                                                 Learn More <i class="fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
@@ -87,6 +89,7 @@
                 </div>
             </div>
         @endif
+
     <!--===== SERVICE AREA ENDS =======-->
 
 

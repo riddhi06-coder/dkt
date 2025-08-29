@@ -20,7 +20,7 @@
         <div class="row align-items-center row-bg1">
           <div class="col-lg-1 col-md-6 col-6">
             <div class="vl-logo">
-              <a href="./"><img src="{{ asset('frontend/assets/img/logo/DKT.png') }}" alt=""></a>
+              <a href="{{ route('frontend.index') }}"><img src="{{ asset('frontend/assets/img/logo/DKT.png') }}" alt=""></a>
             </div>
           </div>
 
@@ -102,7 +102,7 @@
 
               <div class="col-lg-1 col-md-6 col-6">
                 <div class="vl-logo-right">
-                      <a href="#"><img src="{{ asset('frontend/assets/img/logo/Healthcare-Logo.png') }}" alt=""></a>
+                      <a href="{{ route('frontend.index') }}"><img src="{{ asset('frontend/assets/img/logo/Healthcare-Logo.png') }}" alt=""></a>
                   </div>
                   <div class="vl-header-action-item d-block d-lg-none">
                       <button type="button" class="vl-offcanvas-toggle">
