@@ -144,7 +144,7 @@
                 </li>
 
 
-                <li class="sidebar-list {{ request()->routeIs('manage-join-page-details.index', 'manage-chemist-partner.index', 'manage-distributor-partner.index') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-join-page-details.index', 'manage-job-openings.index') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"> </i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
@@ -157,7 +157,7 @@
                   </a>
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('manage-join-page-details.index') }}" class="{{ request()->routeIs('manage-join-page-details.index') ? 'active' : '' }}">Page Details</a></li>
-                    <li><a href="{{ route('manage-chemist-partner.index') }}" class="{{ request()->routeIs('manage-chemist-partner.index') ? 'active' : '' }}">Chemist</a></li>
+                    <li><a href="{{ route('manage-job-openings.index') }}" class="{{ request()->routeIs('manage-job-openings.index') ? 'active' : '' }}">Current Openings</a></li>
                   </ul>
                 </li>
 

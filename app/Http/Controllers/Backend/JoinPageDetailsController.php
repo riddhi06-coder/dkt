@@ -17,7 +17,7 @@ use App\Models\User;
 use App\Models\JoinPageDetail;
 
 
-class JoinPageDetailsontroller extends Controller
+class JoinPageDetailsController extends Controller
 {
 
     public function index()

@@ -18,7 +18,9 @@ use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\DoctorPartnerController;
 use App\Http\Controllers\Backend\ChemistPartnerController;
 use App\Http\Controllers\Backend\DistributorPartnerController;
-use App\Http\Controllers\Backend\JoinPageDetailsontroller;
+use App\Http\Controllers\Backend\JoinPageDetailsController;
+use App\Http\Controllers\Backend\JobOpeningsController;
+
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -99,10 +101,10 @@ Route::resource('manage-chemist-partner', ChemistPartnerController::class);
 Route::resource('manage-distributor-partner', DistributorPartnerController::class);
 
 // ==== Manage JOin US Page details
-Route::resource('manage-join-page-details', JoinPageDetailsontroller::class);
+Route::resource('manage-join-page-details', JoinPageDetailsController::class);
 
-
-
+// ==== Manage Current Openings
+Route::resource('manage-job-openings', JobOpeningsController::class);
 
 
 
