@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\TermsController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\DoctorPartnerController;
 use App\Http\Controllers\Backend\ChemistPartnerController;
-
+use App\Http\Controllers\Backend\DistributorPartnerController;
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -93,6 +93,9 @@ Route::resource('manage-doctor-partner', DoctorPartnerController::class);
 
 // ==== Manage Chemist Partner
 Route::resource('manage-chemist-partner', ChemistPartnerController::class);
+
+// ==== Manage Distributor Partner
+Route::resource('manage-distributor-partner', DistributorPartnerController::class);
 
 
 

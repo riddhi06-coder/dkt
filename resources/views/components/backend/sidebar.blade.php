@@ -125,7 +125,7 @@
                 </li>
 
 
-                <li class="sidebar-list {{ request()->routeIs('manage-doctor-partner.index', 'manage-chemist-partner.index', 'manage-social-home.index','manage-vision.index') ? 'active' : '' }}">
+                <li class="sidebar-list {{ request()->routeIs('manage-doctor-partner.index', 'manage-chemist-partner.index', 'manage-distributor-partner.index') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"> </i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
@@ -139,7 +139,7 @@
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('manage-doctor-partner.index') }}" class="{{ request()->routeIs('manage-doctor-partner.index') ? 'active' : '' }}">Doctor</a></li>
                     <li><a href="{{ route('manage-chemist-partner.index') }}" class="{{ request()->routeIs('manage-chemist-partner.index') ? 'active' : '' }}">Chemist</a></li>
-                    <li><a href="{{ route('manage-social-home.index') }}" class="{{ request()->routeIs('manage-social-home.index') ? 'active' : '' }}">Distributor</a></li>
+                    <li><a href="{{ route('manage-distributor-partner.index') }}" class="{{ request()->routeIs('manage-distributor-partner.index') ? 'active' : '' }}">Distributor</a></li>
                   </ul>
                 </li>
 
