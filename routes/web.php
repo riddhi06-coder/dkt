@@ -108,6 +108,9 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== All Privacy Policy
     Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('frontend.privacy_policy');
 
+    // ==== Contact Us
+    Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('frontend.contact_us');
+
     // ==== Category Details
     Route::get('/category-details/{slug}', [HomeController::class, 'category_details'])->name('frontend.category_details');
 

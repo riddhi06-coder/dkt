@@ -18,6 +18,7 @@ use App\Models\Products;
 use App\Models\ProductDetails;
 use App\Models\PrivacyPolicy;
 use App\Models\Terms;
+use App\Models\ContactDetail;
 
 class HomeController extends Controller
 {
@@ -112,12 +113,19 @@ class HomeController extends Controller
         return view('frontend.privacy_policy', compact('privacy_policy'));
     }
 
-
     // === Terms & Condition
     public function terms_condition() {
         $terms_condition = Terms::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
         return view('frontend.terms_condition', compact('terms_condition'));
     }
+
+
+    // === Contact Us
+    public function contact_us() {
+        $contact_us = ContactDetail::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
+        return view('frontend.contact_us', compact('contact_us'));
+    }
+
 
 
 
