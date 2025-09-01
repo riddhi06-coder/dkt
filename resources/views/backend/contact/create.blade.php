@@ -10,6 +10,7 @@
 	    <!--start sidebar wrapper-->	
 	    @include('components.backend.sidebar')
 	   <!--end sidebar wrapper-->
+       
 
 
         <div class="page-body">

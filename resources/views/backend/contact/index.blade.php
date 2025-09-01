@@ -58,16 +58,30 @@
                             <tr>
                                 <th>#</th>
                                 <th>Email</th>
-                                <th>Description</th>
+                                <th>Contact 1</th>
+                                <th>Contact 2</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                       
+                            @foreach($contacts as $index => $contact)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $contact->email }}</td>
+                                    <td>{{ $contact->contact_number }}</td>
+                                    <td>{{ $contact->other_contact_number }}</td>
+                                    <td>
+                                        <a href="{{ route('manage-contact-details.edit', $contact->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('manage-contact-details.destroy', $contact->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-
-
                     </div>
                   </div>
                 </div>
@@ -79,13 +93,8 @@
              @include('components.backend.footer')
       </div>
     </div>
-
         @include('components.backend.main-js')
-<script>
-    $(document).ready(function() {
-        $('#basic').DataTable(); // Initialize the DataTable on the table with id "basic"
-    });
-</script>
+
 </body>
 
 </html>
