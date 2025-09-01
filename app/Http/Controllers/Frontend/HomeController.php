@@ -19,6 +19,11 @@ use App\Models\ProductDetails;
 use App\Models\PrivacyPolicy;
 use App\Models\Terms;
 use App\Models\ContactDetail;
+use App\Models\DoctorPartner;
+use App\Models\ChemistPartner;
+use App\Models\DistributorPartner;
+
+
 
 class HomeController extends Controller
 {
@@ -119,11 +124,28 @@ class HomeController extends Controller
         return view('frontend.terms_condition', compact('terms_condition'));
     }
 
-
     // === Contact Us
     public function contact_us() {
         $contact_us = ContactDetail::orderBy('inserted_at', 'asc')->wherenull('deleted_by')->get();
         return view('frontend.contact_us', compact('contact_us'));
+    }
+
+    // === I am a Doctor
+    public function i_am_doctor() {
+        $i_am_doctor = DoctorPartner::wherenull('deleted_by')->first();
+        return view('frontend.i_am_doctor', compact('i_am_doctor'));
+    }
+
+    // === I am a Chemist
+    public function i_am_chemist() {
+        $i_am_chemist = ChemistPartner::wherenull('deleted_by')->first();
+        return view('frontend.i_am_chemist', compact('i_am_chemist'));
+    }
+
+    // === I am a Distributor
+    public function i_am_distributor() {
+        $i_am_distributor = DistributorPartner::wherenull('deleted_by')->first();
+        return view('frontend.i_am_distributor', compact('i_am_distributor'));
     }
 
 

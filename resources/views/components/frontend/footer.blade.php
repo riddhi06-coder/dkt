@@ -40,7 +40,9 @@
                   <img src="{{ asset('frontend/assets/img/logo/DKT.png') }}" alt="">
                   <img src="{{ asset('frontend/assets/img/logo/Healthcare-Logo.png') }}" alt="">
                   <div class="space16"></div>
-                  <p>{{ $contact->desc }}</p>
+                  @foreach($contact_us as $contact)
+                      <p>{{ $contact->desc }}</p>
+                  @endforeach
                   <div class="space24"></div>
 
                   {{-- Social Media --}}

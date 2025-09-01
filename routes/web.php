@@ -126,6 +126,15 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== Contact Us
     Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('frontend.contact_us');
 
+     // ==== I am a Doctor
+    Route::get('/i-am-a-doctor', [HomeController::class, 'i_am_doctor'])->name('frontend.i_am_doctor');
+
+    // ==== I am a Chemist
+    Route::get('/i-am-a-chemist', [HomeController::class, 'i_am_chemist'])->name('frontend.i_am_chemist');
+
+    // ==== I am a Distributor
+    Route::get('/i-am-a-distributor', [HomeController::class, 'i_am_distributor'])->name('frontend.i_am_distributor');
+
     // ==== Category Details
     Route::get('/category-details/{slug}', [HomeController::class, 'category_details'])->name('frontend.category_details');
 

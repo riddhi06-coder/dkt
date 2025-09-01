@@ -87,9 +87,9 @@
                         <a href="#">Partner With Us <span><i
                               class="fa-solid fa-angle-down d-lg-inline d-none"></i></span></a>
                         <ul class="sub-menu">
-                          <li><a href="i-am-a-doctor.html">I am a Doctor</a></li>
-                          <li><a href="i-am-a-chemist.html">I am a Chemist</a></li>
-                          <li><a href="i-am-a-distributor.html">I am a Distributor</a></li>
+                          <li><a href="{{ route('frontend.i_am_doctor') }}">I am a Doctor</a></li>
+                          <li><a href="{{ route('frontend.i_am_chemist') }}">I am a Chemist</a></li>
+                          <li><a href="{{ route('frontend.i_am_distributor') }}">I am a Distributor</a></li>
                         </ul>
                       </li>
 
