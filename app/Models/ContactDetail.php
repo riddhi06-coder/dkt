@@ -19,6 +19,7 @@ class ContactDetail extends Model
         'other_contact_number',
         'i_frame',
         'address',
+        'desc',
         'social_media_links',
         'created_at',
         'created_by',

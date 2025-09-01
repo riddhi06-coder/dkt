@@ -92,6 +92,12 @@
                                         </div>
 
 
+                                        <!-- Short Description-->
+                                        <div class="col-md-12 mb-5">
+                                            <label class="form-label" for="about">Short Description<span class="txt-danger">*</span></label>
+                                            <textarea class="form-control" id="desc" name="desc" placeholder="Enter Short Description" required></textarea>
+                                            <div class="invalid-feedback">Please enter an Short Description.</div>
+                                        </div>
 
                                         <!-- Address-->
                                         <div class="col-md-12 mb-5">

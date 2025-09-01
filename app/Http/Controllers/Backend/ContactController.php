@@ -41,6 +41,7 @@ class ContactController extends Controller
                 'other_contact_number' => ['required', 'digits_between:8,15'],
                 'i_frame'              => 'required|string|max:2000', 
                 'address'              => 'required|string|max:2000',
+                'desc'              => 'required|string|max:2000',
                 'social_media.*.platform' => 'required|string',
                 'social_media.*.link'     => 'required|url',
             ], [
@@ -54,6 +55,7 @@ class ContactController extends Controller
                 'other_contact_number.digits_between' => 'Please enter a valid Other Contact Number (8–15 digits).',
                 'i_frame.required'              => 'IFrame embed code is required.',
                 'address.required'              => 'Address is required.',
+                'desc.required'              => 'Address is required.',
                 'social_media.*.platform.required' => 'Social Media Platform is required.',
                 'social_media.*.link.required'     => 'Social Media Link is required.',
                 'social_media.*.link.url'          => 'Please enter a valid URL for Social Media Link.',
@@ -68,6 +70,7 @@ class ContactController extends Controller
             $contactDetails->other_contact_number = $request->other_contact_number;
             $contactDetails->i_frame              = $request->i_frame;
             $contactDetails->address              = $request->address;
+            $contactDetails->desc              = $request->desc;
 
             // JSON encode social media links
             $contactDetails->social_media_links = json_encode($request->social_media);
@@ -109,6 +112,7 @@ class ContactController extends Controller
                 'other_contact_number' => ['required', 'digits_between:8,15'],
                 'i_frame'              => 'required|string|max:2000', 
                 'address'              => 'required|string|max:2000',
+                'desc'              => 'required|string|max:2000',
                 'social_media.*.platform' => 'required|string',
                 'social_media.*.link'     => 'required|url',
             ], [
@@ -122,6 +126,7 @@ class ContactController extends Controller
                 'other_contact_number.digits_between' => 'Please enter a valid Other Contact Number (8–15 digits).',
                 'i_frame.required'              => 'IFrame embed code is required.',
                 'address.required'              => 'Address is required.',
+                'desc.required'              => 'Address is required.',
                 'social_media.*.platform.required' => 'Social Media Platform is required.',
                 'social_media.*.link.required'     => 'Social Media Link is required.',
                 'social_media.*.link.url'          => 'Please enter a valid URL for Social Media Link.',
@@ -137,6 +142,7 @@ class ContactController extends Controller
             $contactDetails->other_contact_number = $request->other_contact_number;
             $contactDetails->i_frame              = $request->i_frame;
             $contactDetails->address              = $request->address;
+            $contactDetails->desc              = $request->desc;
 
             // JSON encode social media links
             $contactDetails->social_media_links   = json_encode($request->social_media);
