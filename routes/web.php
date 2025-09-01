@@ -15,6 +15,9 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\PrivacyController;
 use App\Http\Controllers\Backend\TermsController;
 use App\Http\Controllers\Backend\ContactController;
+use App\Http\Controllers\Backend\DoctorPartnerController;
+
+
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -84,6 +87,12 @@ Route::resource('manage-terms-condition', TermsController::class);
 
 // ==== Manage COntact Details
 Route::resource('manage-contact-details', ContactController::class);
+
+// ==== Manage Doctor Partner
+Route::resource('manage-doctor-partner', DoctorPartnerController::class);
+
+
+
 
 
 
