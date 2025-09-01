@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\DoctorPartnerController;
 use App\Http\Controllers\Backend\ChemistPartnerController;
 use App\Http\Controllers\Backend\DistributorPartnerController;
+use App\Http\Controllers\Backend\JoinPageDetailsontroller;
 
 
 use App\Http\Controllers\Frontend\HomeController;;
@@ -97,6 +98,8 @@ Route::resource('manage-chemist-partner', ChemistPartnerController::class);
 // ==== Manage Distributor Partner
 Route::resource('manage-distributor-partner', DistributorPartnerController::class);
 
+// ==== Manage JOin US Page details
+Route::resource('manage-join-page-details', JoinPageDetailsontroller::class);
 
 
 
@@ -104,7 +107,8 @@ Route::resource('manage-distributor-partner', DistributorPartnerController::clas
 
 
 
-// ======================= Frontend
+
+// ======================= Frontend =========================================
 
 Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
 

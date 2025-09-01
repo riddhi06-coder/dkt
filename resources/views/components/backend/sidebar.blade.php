@@ -144,6 +144,24 @@
                 </li>
 
 
+                <li class="sidebar-list {{ request()->routeIs('manage-join-page-details.index', 'manage-chemist-partner.index', 'manage-distributor-partner.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"> </i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-project') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-project') }}"></use>
+                    </svg>
+                    <span>Join Us</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('manage-join-page-details.index') }}" class="{{ request()->routeIs('manage-join-page-details.index') ? 'active' : '' }}">Page Details</a></li>
+                    <li><a href="{{ route('manage-chemist-partner.index') }}" class="{{ request()->routeIs('manage-chemist-partner.index') ? 'active' : '' }}">Chemist</a></li>
+                  </ul>
+                </li>
+
+
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>
