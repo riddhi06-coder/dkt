@@ -14,20 +14,20 @@ use Illuminate\Support\Facades\Log;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\DoctorPartner;
+use App\Models\ChemistPartner;
 
 
-class DoctorPartnerController extends Controller
+class ChemistPartnerController extends Controller
 {
 
     public function index()
     {
-        $doctorPartners = DoctorPartner::wherenull('deleted_by')->get();
-        return view('backend.partner.doctor.index', compact('doctorPartners'));
+        $doctorPartners = ChemistPartner::wherenull('deleted_by')->get();
+        return view('backend.partner.chemist.index', compact('doctorPartners'));
     }
         public function create(Request $request)
     {
-        return view('backend.partner.doctor.create');
+        return view('backend.partner.chemist.create');
     }
 
     public function store(Request $request)
@@ -58,7 +58,7 @@ class DoctorPartnerController extends Controller
             }
 
             // ✅ Save to database
-            $doctorPartner = new DoctorPartner();
+            $doctorPartner = new ChemistPartner();
             $doctorPartner->banner_heading = $validated['banner_heading'];
             $doctorPartner->banner      = $bannerImage;
             $doctorPartner->description = $validated['description'];
@@ -66,8 +66,8 @@ class DoctorPartnerController extends Controller
             $doctorPartner->inserted_at = Carbon::now();
             $doctorPartner->save();
 
-            return redirect()->route('manage-doctor-partner.index')
-                            ->with('message', 'Doctor Partner details added successfully!');
+            return redirect()->route('manage-chemist-partner.index')
+                            ->with('message', 'Chemist Partner details added successfully!');
             
         } catch (\Illuminate\Validation\ValidationException $ve) {
             throw $ve; 
@@ -79,8 +79,8 @@ class DoctorPartnerController extends Controller
 
     public function edit($id)
     {
-        $partner = DoctorPartner::findOrFail($id);
-        return view('backend.partner.doctor.edit', compact('partner'));
+        $partner = ChemistPartner::findOrFail($id);
+        return view('backend.partner.chemist.edit', compact('partner'));
     }
 
     public function update(Request $request, $id)
@@ -102,7 +102,7 @@ class DoctorPartnerController extends Controller
             ]);
 
             // Find the record
-            $doctorPartner = DoctorPartner::findOrFail($id);
+            $doctorPartner = ChemistPartner::findOrFail($id);
 
             // Handle new image upload
             if ($request->hasFile('thumbnail')) {
@@ -125,8 +125,8 @@ class DoctorPartnerController extends Controller
 
             $doctorPartner->save();
 
-            return redirect()->route('manage-doctor-partner.index')
-                            ->with('message', 'Doctor Partner details updated successfully!');
+            return redirect()->route('manage-chemist-partner.index')
+                            ->with('message', 'Chemist Partner details updated successfully!');
 
         } catch (\Illuminate\Validation\ValidationException $ve) {
             throw $ve;
@@ -141,10 +141,10 @@ class DoctorPartnerController extends Controller
         $data['deleted_by'] =  Auth::user()->id;
         $data['deleted_at'] =  Carbon::now();
         try {
-            $industries = DoctorPartner::findOrFail($id);
+            $industries = ChemistPartner::findOrFail($id);
             $industries->update($data);
 
-            return redirect()->route('manage-doctor-partner.index')->with('message', 'Details deleted successfully!');
+            return redirect()->route('manage-chemist-partner.index')->with('message', 'Details deleted successfully!');
         } catch (Exception $ex) {
             return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
         }
