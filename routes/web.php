@@ -115,7 +115,7 @@ Route::resource('manage-job-openings', JobOpeningsController::class);
 Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
 
     // ==== Home
-    Route::get('/', [HomeController::class, 'home'])->name('frontend.index');
+    Route::get('/home', [HomeController::class, 'home'])->name('frontend.index');
 
     // ==== About us
     Route::get('/about-us', [HomeController::class, 'about_us'])->name('frontend.about_us');
