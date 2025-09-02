@@ -141,6 +141,9 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     // ==== I am a Distributor
     Route::get('/i-am-a-distributor', [HomeController::class, 'i_am_distributor'])->name('frontend.i_am_distributor');
 
+    // ==== Join Us
+    Route::get('/join-us', [HomeController::class, 'join_us'])->name('frontend.join_us');
+
     // ==== Category Details
     Route::get('/category-details/{slug}', [HomeController::class, 'category_details'])->name('frontend.category_details');
 

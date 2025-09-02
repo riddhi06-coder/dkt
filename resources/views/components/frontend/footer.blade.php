@@ -126,7 +126,7 @@
                 <li><a href="{{ route('frontend.about_us') }}">About Us</a></li>
                 <li><a href="#">Press Release</a></li>
                 <li><a href="#">Blogs</a></li>
-                <li><a href="join-us.html">Join Us</a></li>
+                <li><a href="{{ route('frontend.join_us') }}">Join Us</a></li>
                 <li><a href="{{ route('frontend.contact_us') }}">Contact Us</a></li>
                 <li><a href="{{ route('frontend.terms_condition') }}">Terms & Conditions</a></li>
                 <li><a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a></li>

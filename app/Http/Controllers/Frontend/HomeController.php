@@ -22,7 +22,8 @@ use App\Models\ContactDetail;
 use App\Models\DoctorPartner;
 use App\Models\ChemistPartner;
 use App\Models\DistributorPartner;
-
+use App\Models\JobOpening;
+use App\Models\JoinPageDetail;
 
 
 class HomeController extends Controller
@@ -146,6 +147,15 @@ class HomeController extends Controller
     public function i_am_distributor() {
         $i_am_distributor = DistributorPartner::wherenull('deleted_by')->first();
         return view('frontend.i_am_distributor', compact('i_am_distributor'));
+    }
+
+
+    // === Join Us
+    public function join_us() {
+        $join_us = JoinPageDetail::wherenull('deleted_by')->first();
+        $features = json_decode($join_us->features, true);
+        $openings = JobOpening::wherenull('deleted_by')->get();
+        return view('frontend.join_us', compact('join_us','features','openings'));
     }
 
 

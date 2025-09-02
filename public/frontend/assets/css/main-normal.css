@@ -16984,7 +16984,7 @@ img {
 .request-area {
   position: relative;
   padding: 70px 0;
-  background-image: url(https://mbihosting.in/DKT-india/assets/img/about/careers-img.webp);
+  /* background-image: url(https://mbihosting.in/DKT-india/assets/img/about/careers-img.webp); */
   background-size: cover;
   background-position: center;
   z-index: 1;

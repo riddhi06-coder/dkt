@@ -93,7 +93,7 @@
                         </ul>
                       </li>
 
-                      <li><a href="join-us.html">Join Us</a></li>
+                      <li><a href="{{ route('frontend.join_us') }}">Join Us</a></li>
                       <li><a href="{{ route('frontend.contact_us') }}">Contact Us</a></li>
                     </ul>
                   </nav>
