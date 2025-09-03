@@ -131,8 +131,8 @@
 
                                         <!-- Use of Tablet -->
                                         <div class="col-md-12">
-                                            <label for="use_of_tablet" class="form-label">Use of Tablet <span class="txt-danger">*</span></label>
-                                            <textarea name="use_of_tablet" id="summernote2" class="form-control" rows="4" required>{{ $productDetails->use_of_tablet }}</textarea>
+                                            <label for="use_of_tablet" class="form-label">Use of Tablet </label>
+                                            <textarea name="use_of_tablet" id="summernote2" class="form-control" rows="4">{{ $productDetails->use_of_tablet }}</textarea>
                                         </div>
 
                                         <!-- Direction To Use -->

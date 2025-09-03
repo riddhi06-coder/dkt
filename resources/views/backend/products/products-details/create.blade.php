@@ -123,8 +123,8 @@
 
                                         <!-- Product Use of Tablet Textarea -->
                                         <div class="col-md-12">
-                                            <label for="use_of_tablet" class="form-label">Use of Tablet <span class="txt-danger">*</span></label>
-                                            <textarea name="use_of_tablet" id="summernote2" class="form-control" rows="4" placeholder="Enter Use of Tablet" required>{{ old('use_of_tablet') }}</textarea>
+                                            <label for="use_of_tablet" class="form-label">Use of Tablet </label>
+                                            <textarea name="use_of_tablet" id="summernote2" class="form-control" rows="4" placeholder="Enter Use of Tablet">{{ old('use_of_tablet') }}</textarea>
                                             <div class="invalid-feedback">Please enter a Use of Tablet.</div>
                                         </div>
 
