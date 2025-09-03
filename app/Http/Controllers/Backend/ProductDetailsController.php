@@ -186,8 +186,9 @@ class ProductDetailsController extends Controller
                 Rule::unique('product_details')
                     ->ignore($productDetails->id)
                     ->where(function ($query) use ($request) {
-                        return $query->where('category_id', $request->category_id)
-                                    // ->where('product_id', $request->product_id)
+                        return $query
+                        // where('category_id', $request->category_id)
+                                    ->where('product_id', $request->product_id)
                                     ->whereNull('deleted_by');
                     }),
             ],
