@@ -298,7 +298,11 @@
                     productSelect.innerHTML = '<option value="">-- Select Product --</option>';
 
                     if (categoryId) {
-                        const baseUrl = window.location.origin + window.location.pathname; 
+                        const origin = window.location.origin; // https://anvayafoundation.com
+                        const pathParts = window.location.pathname.split('/'); 
+                        const basePath = pathParts.length > 1 ? `/${pathParts[1]}` : ''; // "/dkt"
+                        const baseUrl = origin + basePath; // https://anvayafoundation.com/dkt
+
                         const fetchUrl = `${baseUrl}/get-products/${categoryId}`;
 
                         fetch(fetchUrl)
@@ -314,6 +318,7 @@
                             })
                             .catch(error => console.error('Error fetching products:', error));
                     }
+
 
                 });
             });
