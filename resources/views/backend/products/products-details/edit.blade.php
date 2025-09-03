@@ -147,8 +147,8 @@
                                             <table class="table table-bordered" id="tabletTable">
                                                 <thead>
                                                     <tr>
-                                                        <th>Tablet Name <span class="txt-danger">*</span></th>
-                                                        <th>Dose <span class="txt-danger">*</span></th>
+                                                        <th>Tablet Name </th>
+                                                        <th>Dose </th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -158,8 +158,8 @@
                                                     @endphp
                                                     @foreach($composition as $index => $item)
                                                         <tr>
-                                                            <td><input type="text" name="tablet_name[]" class="form-control" value="{{ $item['tablet_name'] }}" required></td>
-                                                            <td><input type="text" name="dose[]" class="form-control" value="{{ $item['dose'] }}" required></td>
+                                                            <td><input type="text" name="tablet_name[]" class="form-control" value="{{ $item['tablet_name'] }}"></td>
+                                                            <td><input type="text" name="dose[]" class="form-control" value="{{ $item['dose'] }}"></td>
                                                             <td>
                                                                 @if($index == 0)
                                                                     <button type="button" class="btn btn-primary" id="addTabletRow">Add More</button>
@@ -272,10 +272,10 @@
 
                     newRow.innerHTML = `
                         <td>
-                            <input type="text" name="tablet_name[]" id="tablet_name_${rowIndex}" class="form-control" placeholder="Enter Tablet Name" required>
+                            <input type="text" name="tablet_name[]" id="tablet_name_${rowIndex}" class="form-control" placeholder="Enter Tablet Name">
                         </td>
                         <td>
-                            <input type="text" name="dose[]" id="dose_${rowIndex}" class="form-control" placeholder="Enter Dose" required>
+                            <input type="text" name="dose[]" id="dose_${rowIndex}" class="form-control" placeholder="Enter Dose">
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger removeRow">Remove</button>
@@ -303,34 +303,34 @@
                 productSelect.innerHTML = '<option value="">-- Select Product --</option>'; // reset
 
                 if (categoryId) {
-    const origin = window.location.origin; // https://anvayafoundation.com
-    const pathParts = window.location.pathname.split('/'); 
-    const basePath = pathParts.length > 1 ? `/${pathParts[1]}` : ''; // "/dkt"
-    const baseUrl = origin + basePath; // https://anvayafoundation.com/dkt
+                        const origin = window.location.origin; // https://anvayafoundation.com
+                        const pathParts = window.location.pathname.split('/'); 
+                        const basePath = pathParts.length > 1 ? `/${pathParts[1]}` : ''; // "/dkt"
+                        const baseUrl = origin + basePath; // https://anvayafoundation.com/dkt
 
-    const fetchUrl = `${baseUrl}/get-products/${categoryId}`;
+                        const fetchUrl = `${baseUrl}/get-products/${categoryId}`;
 
-    fetch(fetchUrl)
-        .then(response => response.json())
-        .then(data => {
-            // clear existing options
-            productSelect.innerHTML = '<option value="">Select Product</option>';
+                        fetch(fetchUrl)
+                            .then(response => response.json())
+                            .then(data => {
+                                // clear existing options
+                                productSelect.innerHTML = '<option value="">Select Product</option>';
 
-            data.forEach(product => {
-                let option = document.createElement('option');
-                option.value = product.id;
-                option.text = product.product_name;
+                                data.forEach(product => {
+                                    let option = document.createElement('option');
+                                    option.value = product.id;
+                                    option.text = product.product_name;
 
-                // select stored product in edit mode
-                if (selectedProductId && product.id == selectedProductId) {
-                    option.selected = true;
+                                    // select stored product in edit mode
+                                    if (selectedProductId && product.id == selectedProductId) {
+                                        option.selected = true;
+                                    }
+
+                                    productSelect.appendChild(option);
+                                });
+                            })
+                            .catch(err => console.error('Error fetching products:', err));
                 }
-
-                productSelect.appendChild(option);
-            });
-        })
-        .catch(err => console.error('Error fetching products:', err));
-}
 
             }
 

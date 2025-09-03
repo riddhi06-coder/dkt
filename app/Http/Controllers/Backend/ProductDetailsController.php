@@ -93,8 +93,8 @@ class ProductDetailsController extends Controller
             'description.required'    => 'Please enter a description.',
             'use_of_tablet.required'  => 'Please enter Use of Tablet.',
             'direction_to_use.required' => 'Please enter Direction To use.',
-            'tablet_name.*.required'  => 'Please enter Tablet Name.',
-            'dose.*.required'         => 'Please enter Dose.',
+            // 'tablet_name.*.required'  => 'Please enter Tablet Name.',
+            // 'dose.*.required'         => 'Please enter Dose.',
         ]);
 
         // ✅ Step 2: Handle Banner Image upload
@@ -198,8 +198,8 @@ class ProductDetailsController extends Controller
             'description'       => 'required|string',
             'use_of_tablet'     => 'required|string',
             'direction_to_use'  => 'required|string',
-            'tablet_name.*'     => 'required|string',
-            'dose.*'            => 'required|string',
+            'tablet_name.*'     => 'nullable|string',
+            'dose.*'            => 'nullable|string',
         ], [
             'category_id.required'    => 'Please select a category.',
             'category_id.exists'      => 'The selected category is invalid.',
@@ -216,8 +216,8 @@ class ProductDetailsController extends Controller
             'description.required'    => 'Please enter a description.',
             'use_of_tablet.required'  => 'Please enter Use of Tablet.',
             'direction_to_use.required' => 'Please enter Direction To use.',
-            'tablet_name.*.required'  => 'Please enter Tablet Name.',
-            'dose.*.required'         => 'Please enter Dose.',
+            // 'tablet_name.*.required'  => 'Please enter Tablet Name.',
+            // 'dose.*.required'         => 'Please enter Dose.',
         ]);
 
         // ✅ Step 3: Handle Banner Image upload (replace if new file uploaded)
