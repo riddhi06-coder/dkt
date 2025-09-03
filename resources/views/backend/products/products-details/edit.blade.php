@@ -302,22 +302,29 @@
                 let productSelect = document.getElementById('product_id');
                 productSelect.innerHTML = '<option value="">-- Select Product --</option>'; // reset
 
-                if(categoryId) {
+                if (categoryId) {
                     fetch(`/get-products/${categoryId}`)
                         .then(response => response.json())
                         .then(data => {
+                            // clear old options first
+                            productSelect.innerHTML = '<option value="">Select Product</option>';
+
                             data.forEach(product => {
                                 let option = document.createElement('option');
                                 option.value = product.id;
                                 option.text = product.product_name;
-                                if(selectedProductId && product.id == selectedProductId) {
-                                    option.selected = true; // select stored product
+
+                                // Pre-select product when editing
+                                if (selectedProductId && product.id == selectedProductId) {
+                                    option.selected = true;
                                 }
+
                                 productSelect.appendChild(option);
                             });
                         })
                         .catch(err => console.error(err));
                 }
+
             }
 
             // On page load, populate products of the stored category
