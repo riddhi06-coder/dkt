@@ -142,18 +142,18 @@
                                             <table class="table table-bordered p-3" id="tabletTable" style="border: 2px solid #dee2e6;">
                                                 <thead>
                                                     <tr>
-                                                        <th>Tablet Name <span class="txt-danger">*</span></th>
-                                                        <th>Dose <span class="txt-danger">*</span></th>
+                                                        <th>Tablet Name</th>
+                                                        <th>Dose</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" name="tablet_name[]" id="tablet_name_0" class="form-control" placeholder="Enter Tablet Name" required>
+                                                            <input type="text" name="tablet_name[]" id="tablet_name_0" class="form-control" placeholder="Enter Tablet Name">
                                                         </td>
                                                         <td>
-                                                            <input type="text" name="dose[]" id="dose_0" class="form-control" placeholder="Enter Dose" required>
+                                                            <input type="text" name="dose[]" id="dose_0" class="form-control" placeholder="Enter Dose">
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary" id="addTabletRow">Add More</button>
@@ -261,10 +261,10 @@
 
                     newRow.innerHTML = `
                         <td>
-                            <input type="text" name="tablet_name[]" id="tablet_name_${rowIndex}" class="form-control" placeholder="Enter Tablet Name" required>
+                            <input type="text" name="tablet_name[]" id="tablet_name_${rowIndex}" class="form-control" placeholder="Enter Tablet Name">
                         </td>
                         <td>
-                            <input type="text" name="dose[]" id="dose_${rowIndex}" class="form-control" placeholder="Enter Dose" required>
+                            <input type="text" name="dose[]" id="dose_${rowIndex}" class="form-control" placeholder="Enter Dose">
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger removeTabletRow">Remove</button>

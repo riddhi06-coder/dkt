@@ -74,8 +74,8 @@ class ProductDetailsController extends Controller
             'description'       => 'required|string',
             'use_of_tablet'     => 'required|string',
             'direction_to_use'  => 'required|string',
-            'tablet_name.*'     => 'required|string',
-            'dose.*'            => 'required|string',
+            'tablet_name.*'     => 'nullable|string',
+            'dose.*'            => 'nullable|string',
         ], [
             'category_id.required'    => 'Please select a category.',
             'category_id.exists'      => 'The selected category is invalid.',
