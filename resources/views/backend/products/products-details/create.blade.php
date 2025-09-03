@@ -308,7 +308,7 @@
                         fetch(fetchUrl)
                             .then(response => response.json())
                             .then(data => {
-                                productSelect.innerHTML = ''; // clear old options
+                                productSelect.innerHTML = '<option value="">-- Select Product --</option>'; // clear old options
                                 data.forEach(product => {
                                     const option = document.createElement('option');
                                     option.value = product.id;
