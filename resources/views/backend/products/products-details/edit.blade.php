@@ -303,27 +303,34 @@
                 productSelect.innerHTML = '<option value="">-- Select Product --</option>'; // reset
 
                 if (categoryId) {
-                    fetch(`/get-products/${categoryId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // clear old options first
-                            productSelect.innerHTML = '<option value="">Select Product</option>';
+    const origin = window.location.origin; // https://anvayafoundation.com
+    const pathParts = window.location.pathname.split('/'); 
+    const basePath = pathParts.length > 1 ? `/${pathParts[1]}` : ''; // "/dkt"
+    const baseUrl = origin + basePath; // https://anvayafoundation.com/dkt
 
-                            data.forEach(product => {
-                                let option = document.createElement('option');
-                                option.value = product.id;
-                                option.text = product.product_name;
+    const fetchUrl = `${baseUrl}/get-products/${categoryId}`;
 
-                                // Pre-select product when editing
-                                if (selectedProductId && product.id == selectedProductId) {
-                                    option.selected = true;
-                                }
+    fetch(fetchUrl)
+        .then(response => response.json())
+        .then(data => {
+            // clear existing options
+            productSelect.innerHTML = '<option value="">Select Product</option>';
 
-                                productSelect.appendChild(option);
-                            });
-                        })
-                        .catch(err => console.error(err));
+            data.forEach(product => {
+                let option = document.createElement('option');
+                option.value = product.id;
+                option.text = product.product_name;
+
+                // select stored product in edit mode
+                if (selectedProductId && product.id == selectedProductId) {
+                    option.selected = true;
                 }
+
+                productSelect.appendChild(option);
+            });
+        })
+        .catch(err => console.error('Error fetching products:', err));
+}
 
             }
 
