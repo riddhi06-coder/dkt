@@ -63,7 +63,7 @@ class ProductDetailsController extends Controller
                 'exists:product_category,id',
                 Rule::unique('product_details')->where(function ($query) use ($request) {
                     return $query->where('category_id', $request->category_id)
-                                ->where('product_id', $request->product_id) 
+                                // ->where('product_id', $request->product_id) 
                                 ->whereNull('deleted_by');
                 }),
             ],
@@ -187,7 +187,7 @@ class ProductDetailsController extends Controller
                     ->ignore($productDetails->id)
                     ->where(function ($query) use ($request) {
                         return $query->where('category_id', $request->category_id)
-                                    ->where('product_id', $request->product_id)
+                                    // ->where('product_id', $request->product_id)
                                     ->whereNull('deleted_by');
                     }),
             ],
