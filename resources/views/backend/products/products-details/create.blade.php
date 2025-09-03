@@ -298,9 +298,13 @@
                     productSelect.innerHTML = '<option value="">-- Select Product --</option>';
 
                     if (categoryId) {
-                        fetch(`/get-products/${categoryId}`)
+                        const baseUrl = window.location.origin + window.location.pathname; 
+                        const fetchUrl = `${baseUrl}/get-products/${categoryId}`;
+
+                        fetch(fetchUrl)
                             .then(response => response.json())
                             .then(data => {
+                                productSelect.innerHTML = ''; // clear old options
                                 data.forEach(product => {
                                     const option = document.createElement('option');
                                     option.value = product.id;
@@ -310,6 +314,7 @@
                             })
                             .catch(error => console.error('Error fetching products:', error));
                     }
+
                 });
             });
         </script>
