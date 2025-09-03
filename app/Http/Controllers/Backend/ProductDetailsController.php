@@ -60,12 +60,12 @@ class ProductDetailsController extends Controller
         $validated = $request->validate([
             'category_id'       => [
                 'required',
-                'exists:product_category,id',
-                Rule::unique('product_details')->where(function ($query) use ($request) {
-                    return $query->where('category_id', $request->category_id)
-                                // ->where('product_id', $request->product_id) 
-                                ->whereNull('deleted_by');
-                }),
+                // 'exists:product_category,id',
+                // Rule::unique('product_details')->where(function ($query) use ($request) {
+                //     return $query->where('category_id', $request->category_id)
+                //                 // ->where('product_id', $request->product_id) 
+                //                 ->whereNull('deleted_by');
+                // }),
             ],
             'product_id'        => 'required|exists:products,id',
             'thumbnail'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -183,14 +183,14 @@ class ProductDetailsController extends Controller
             'category_id'       => [
                 'required',
                 'exists:product_category,id',
-                Rule::unique('product_details')
-                    ->ignore($productDetails->id)
-                    ->where(function ($query) use ($request) {
-                        return $query
-                        // where('category_id', $request->category_id)
-                                    ->where('product_id', $request->product_id)
-                                    ->whereNull('deleted_by');
-                    }),
+                // Rule::unique('product_details')
+                //     ->ignore($productDetails->id)
+                //     ->where(function ($query) use ($request) {
+                //         return $query
+                //         // where('category_id', $request->category_id)
+                //                     ->where('product_id', $request->product_id)
+                //                     ->whereNull('deleted_by');
+                //     }),
             ],
             'product_id'        => 'required|exists:products,id',
             'thumbnail'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
