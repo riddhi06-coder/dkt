@@ -131,7 +131,7 @@
                                         <!-- Product Direction To use Textarea -->
                                         <div class="col-md-12">
                                             <label for="direction_to_use" class="form-label">Direction To use <span class="txt-danger">*</span></label>
-                                            <textarea name="direction_to_use" id="summernote3" class="form-control" rows="4" placeholder="Enter Direction To use" required>{{ old('direction_to_use') }}</textarea>
+                                            <textarea name="direction_to_use" id="editor" class="form-control" rows="4" placeholder="Enter Direction To use" required>{{ old('direction_to_use') }}</textarea>
                                             <div class="invalid-feedback">Please enter a Direction To use.</div>
                                         </div>
 
