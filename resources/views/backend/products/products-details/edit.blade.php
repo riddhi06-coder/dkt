@@ -138,7 +138,7 @@
                                         <!-- Direction To Use -->
                                         <div class="col-md-12">
                                             <label for="direction_to_use" class="form-label">Direction To Use <span class="txt-danger">*</span></label>
-                                            <textarea name="direction_to_use" id="summernote3" class="form-control" rows="4" required>{{ $productDetails->direction_to_use }}</textarea>
+                                            <textarea name="direction_to_use" id="editor" class="form-control" rows="4" required>{{ $productDetails->direction_to_use }}</textarea>
                                         </div>
 
                                         <!-- Tablet & Dose Table -->
